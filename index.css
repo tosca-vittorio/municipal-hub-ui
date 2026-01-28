@@ -1,0 +1,908 @@
+  /*--- GENERALE ---*/
+body
+{
+  /*border: 3px solid black;*/
+  width: 100%;
+  height: 100%;
+  display: flex;
+  flex-direction: column;
+  justify-content: center;
+  align-items: center;
+  overflow-x: hidden;
+  padding: 0px;
+  margin: 0px;
+}
+
+  /*--- SEZIONE 1 ---*/
+.master-text-container
+{
+  margin-top: 1.5%;
+  width: 100%;
+  height: 100%;
+  display: flex;
+  justify-content: center;
+  align-items: center;
+  flex-direction: column;
+}
+
+.uptitle-text
+{
+  width: 50%;
+  display: flex;
+  justify-content: center;
+  align-items: center;
+}
+
+.uptitle-text h3
+{
+  font-family: "Roboto", sans-serif;
+  font-size: 19px;
+  font-weight: 500;
+  font-style: normal;
+  color: #3a6eb3fb; /*#02377cfb;*/
+  margin: 15px 0px;
+}
+
+.title-text
+{
+  display: flex;
+  justify-content: center;
+  align-items: center;
+  width: 50%;
+}
+
+.title-text h1
+{
+  margin: 0;
+  font-size: 4em;
+  letter-spacing: 1.3px;
+}
+
+.nome-comune
+{
+  font-size: 50px;
+  /*color: #3a6eb3fb; #02377cfb;*/ 
+}
+
+/*
+.content-text
+{
+  border: 3px solid blue;
+  width: 85%;
+  display: flex;
+  justify-content: center;
+  align-items: center;
+  padding: 10px;
+}
+
+.content-text p
+{
+  text-align: center;
+  color: #778899;
+  font-size: 1.4em;
+}
+*/
+
+
+  /*--- SEZIONE 2 ---*/
+.master-container
+{
+  display: flex;
+  flex-direction: column;
+  justify-content: center;
+  width: 100%;
+  height: 100%;
+  padding: 0px;
+  margin-top: 1.25%;
+}
+
+.first-row, .second-row
+{
+  display: flex;
+  flex-direction: row;
+  align-items: center;
+  justify-content: center;
+  padding: 0px;
+  width: 100%;
+  height: 100%;
+}
+
+.first-element-container, .second-element-container, .third-element-container, .fourth-element-container
+{
+  padding: 0px;
+  width: 50%;
+  height: 50%;
+  display: flex;
+  justify-content: center;
+  align-items: center;
+}
+
+.first-element, .second-element, .third-element, .fourth-element
+{
+  display: flex;
+  flex-direction: column;
+  justify-content: center;
+  align-items: center;
+  width: 100%;
+  height: 100%;
+}
+
+.first-camion,
+.second-camion,
+.sp-online,
+.app
+{
+  justify-content: center;
+  align-items: center;
+  width: 70%;
+  height: 50%;
+  transition: 1s;
+  padding: 0%;
+  margin: 0%;
+  display: flex;
+}
+
+.first-camion img, .second-camion img, .app img, .sp-online img
+{
+  height: 100%;
+  width: 100%;
+}
+
+
+.first-box, .second-box, .third-box, .fourth-box
+{
+  border: 3px solid silver;
+  border-radius: 10px;
+  display: flex;
+  flex-direction: row;
+  justify-content: space-between;
+  align-items: center;
+  width: 70%;
+  height: 100px;
+  box-shadow: 10px 10px 50px;
+  transition: 1s;
+  position: relative;
+  bottom: 45px; 
+}
+
+.first-box span, .second-box span, .third-box span, .fourth-box span{padding: 1.3em;}
+
+.first-box:hover, .second-box:hover, .third-box:hover, .fourth-box:hover, .google-box img:hover, .apple-box img:hover, .applestore-box img:hover, .playstore-box img:hover {transform: scale(1.1);}
+
+.icon-box
+{
+  max-width: 30%;
+  max-height: 100%;
+  padding: 0;
+  margin-left: 50px;
+  display: flex;
+  justify-content: center;
+  align-items: center;
+}
+
+.icon-box img
+{
+  width: 50%;
+  height: 50%;
+  cursor: pointer;
+}
+
+/*
+#imgIcon1:hover {content: url('IMG/USED/01_hover/hover differenziata.png');}
+#imgIcon2:hover {content: url('IMG/USED/01_hover/hover spazzamento.png');} 
+#imgIcon3:hover {content: url('IMG/USED/01_hover/hover sportello.png');}
+#imgIcon4:hover {content: url('IMG/USED/01_hover/hover app.png');}
+
+#imgIcon5:hover {content: url('IMG/USED/02_hover/hover calendario.png');}
+#imgIcon6:hover {content: url('IMG/USED/02_hover/hover recycle.png');}
+#imgIcon7:hover {content: url('IMG/USED/01_hover/hover app.png');}
+
+#imgIcon8:hover {content: url('IMG/USED/02_hover/hover abecedario.png');}
+#imgIcon9:hover {content: url('IMG/USED/02_hover/hover centro.png');}
+#imgIcon10:hover {content: url('IMG/USED/02_hover/hover ritiro.png');}
+
+#imgIcon11:hover {content: url('IMG/USED/03_hover/hover mini-mail.png');}
+#imgIcon12:hover {content: url('IMG/USED/03_hover/hover mini-phone.png');}
+#imgIcon13:hover {content: url('IMG/USED/03_hover/hover mini-modulo.png');}
+#imgIcon14:hover {content: url('IMG/USED/03_hover/hover mini-app.png');}
+#imgIcon15:hover {content: url('IMG/USED/03_hover/hover mini-maps.png');}
+*/
+
+#imgIcon1:hover {content: url('https://www.progitec.info/wp-content/uploads/2024/09/hover-differenziata.png');}
+#imgIcon2:hover {content: url('https://www.progitec.info/wp-content/uploads/2024/09/hover-spazzamento.png');} 
+#imgIcon3:hover {content: url('https://www.progitec.info/wp-content/uploads/2024/09/hover-sportello.png');}
+#imgIcon4:hover {content: url('https://www.progitec.info/wp-content/uploads/2024/09/hover-app.png');}
+
+#imgIcon5:hover {content: url('https://www.progitec.info/wp-content/uploads/2024/09/hover-calendario.png');}
+#imgIcon6:hover {content: url('https://www.progitec.info/wp-content/uploads/2024/09/hover-recycle.png');}
+#imgIcon7:hover {content: url('https://www.progitec.info/wp-content/uploads/2024/09/hover-app.png');}
+
+#imgIcon8:hover {content: url('https://www.progitec.info/wp-content/uploads/2024/09/hover-abecedario.png');}
+#imgIcon9:hover {content: url('https://www.progitec.info/wp-content/uploads/2024/09/hover-centro.png');}
+#imgIcon10:hover {content: url('https://www.progitec.info/wp-content/uploads/2024/09/hover-ritiro.png');}
+
+#imgIcon11:hover {content: url('https://www.progitec.info/wp-content/uploads/2024/09/hover-mini-mail.png');}
+#imgIcon12:hover {content: url('https://www.progitec.info/wp-content/uploads/2024/09/hover-mini-phone.png');}
+#imgIcon13:hover {content: url('https://www.progitec.info/wp-content/uploads/2024/09/Progitec-31.png');}
+#imgIcon14:hover {content: url('https://www.progitec.info/wp-content/uploads/2024/09/Progitec-33.png');}
+#imgIcon15:hover {content: url('https://www.progitec.info/wp-content/uploads/2024/09/hover-mini-maps.png');}
+
+
+#imgIcon1:active {background-image: url('https://www.progitec.info/wp-content/uploads/2024/09/hover-differenziata.png');}
+#imgIcon2:active {background-image: url('https://www.progitec.info/wp-content/uploads/2024/09/hover-spazzamento.png');}
+#imgIcon3:active {background-image: url('https://www.progitec.info/wp-content/uploads/2024/09/hover-sportello.png');}
+#imgIcon4:active {background-image: url('https://www.progitec.info/wp-content/uploads/2024/09/hover-app.png');}
+
+.text-box
+{
+  display: flex;
+  justify-content: center;
+  align-items: center;
+  text-align: center;
+  font-size: 1.1em;
+  max-width: 70%;
+  max-height: 100%;
+  margin-left: 10%;
+  padding: 0;
+}
+
+/*--- SECONDA SEZIONE ---*/
+.info-container
+{
+  display: flex;
+  justify-content: center;
+  align-items: center;
+  flex-direction: column;
+  background-color:#e3e3e3;
+  margin-top: 50px;
+  border-radius: 20px;
+  width: 100%;
+}
+
+.first-info-box, .second-info-box, .third-info-box
+{
+  width: 100%;
+  display: flex;
+  justify-content: center;
+  align-items: center;
+  text-align: center;
+  flex-direction: column;
+  margin-bottom: 20px;
+  margin-top: 20px;
+}
+
+.p-row
+{
+  display: flex;
+  justify-content: center;
+  align-items: center;
+  width: 55%;
+  /*border: 3px solid blue;*/
+}
+
+.title-container
+{
+  /*border: 3px solid orange;*/
+  width: 100%;
+  height: 100%;
+}
+
+.info-news, .info-documents, .dati-raccolta-differenziata
+{
+  width: 100%;
+  font-size: 45px;
+  color: #3a6eb3fb;
+  margin: 0px;
+  /*border: 3px solid green;*/
+}
+
+.arrow-container
+{
+  /*border: 3px solid red;*/
+  display: flex;
+  justify-content: center;
+  align-items: center;
+  width: 5%;
+}
+
+.arrow-container img
+{
+  border: 3px solid #3a6eb3fb;
+  border-radius: 100%;
+  width: 100%;
+  height: 100%;
+}
+
+.arrow-container img:hover
+{
+  cursor: pointer;
+}
+
+.separator
+{
+  border: 3px solid #3a6eb3fb;
+  width: 100%;
+  margin-bottom: 10px;
+  border-radius: 50%;
+}
+
+.dettagli
+{
+  /*border: 3px solid purple;*/
+  display: flex;
+  flex-direction: column;
+  justify-content: start;
+  align-items: center;
+  width: 40%;
+  position: relative;
+  right: 20%;
+}
+
+.cnt
+{
+  right: 9%;
+}
+
+.hidden
+{
+  display: none;
+}
+
+.first-news, .second-news, .third-news,
+.first-documents, .second-documents, .third-documents
+{
+  display: flex;
+  flex-direction: row;
+  justify-content: center;
+  align-items: center;
+  width: 100%;
+  margin: 1% 0;
+  border-radius: 15px;
+}
+
+.icon-news, .icon-documents
+{
+  display: flex;
+  width: 10%;
+  height: 100%;
+  position: relative;
+  left: -10px;
+}
+
+.icon-news img, .icon-documents img
+{
+  width: 100%;
+  height: 100%;
+}
+
+.link-news, .link-documents
+{
+  display: flex;
+  width: 55%;
+  justify-content: flex-start;
+  text-align: center;
+}
+
+.link-documents a, .link-news a 
+{
+  color: black;
+  transition: color 0.3s ease; /* Aggiunge un effetto di transizione al cambio di colore */
+  font-weight: bold; /* Rende il testo in grassetto */
+  text-shadow: 1px 1px 2px rgba(57, 61, 70, 0.5); /* Aggiunge un effetto ombra al testo */
+  font-size: 23px;
+  text-decoration: none; /* Rimuove la sottolineatura predefinita */
+
+  font-family: "Roboto", sans-serif;
+  font-weight: 700;
+  font-style: normal;
+}
+
+.link-documents a:hover, .link-news a:hover
+{
+  transform: scale(1.1);
+  color: #3a6eb3fb; /* Cambia il colore al passaggio del mouse */
+  transition: transform 0.3s ease, color 0.3s ease; /* Aggiunge un effetto di transizione fluido */
+}
+
+
+.button-box a 
+{
+  color: #fff; /* Imposta il colore del testo */
+  transition: color 0.3s ease; /* Aggiunge un effetto di transizione al cambio di colore */
+  font-weight: bold; /* Rende il testo in grassetto */
+  text-shadow: 1px 1px 2px rgba(57, 61, 70, 0.5); /* Aggiunge un effetto ombra al testo */
+  font-size: 23px;
+  text-decoration: none; /* Rimuove la sottolineatura predefinita */
+
+  font-family: "Roboto", sans-serif;
+  font-weight: 700;
+  font-style: normal;
+}
+
+.button-box a:hover, .sportello-help .button-box a:hover
+{
+  transform: scale(1.1);
+  color: #fff; /* Cambia il colore al passaggio del mouse */
+  transition: transform 0.3s ease, color 0.3s ease; /* Aggiunge un effetto di transizione fluido */
+}
+
+
+  
+/*--- TABELLA ---*/
+.table
+{
+  margin: 20px auto;
+  width: 150%;
+  height: 150%;
+  border-radius: 5px;
+  display: flex;
+  justify-content: center;
+  align-items: center;
+}
+
+.table-style
+{
+  width: 100%;
+  border-collapse: collapse;
+  border: 2px solid #333;
+}
+
+.table-style th 
+{
+  background-color: #333; 
+  color: #fff;
+  padding: 10px;
+}
+
+.table-style td
+{
+  padding: 10px;
+  border: 1px solid #ccc;
+}
+
+/* Stile per le righe dispari */
+.table-style tr:nth-child(odd) 
+{
+  background-color: #f2f2f2; /* Sfondo grigio chiaro per le righe dispari */
+}
+  
+/* Stile per le righe dell'intestazione */
+.table-style tr:first-child 
+{
+  background-color: #666; /* Sfondo grigio per la riga dell'intestazione */
+  color: #fff; /* Testo bianco per l'intestazione */
+}
+  
+/* Stile per le righe al passaggio del mouse */
+.table-style tr:hover 
+{
+  background-color: #e0e0e0; /* Sfondo grigio più chiaro al passaggio del mouse */
+}
+
+/*--- TERZA SEZIONE ---*/
+#imgIcon16:hover {content: url('https://www.progitec.info/wp-content/uploads/2024/11/hover-fb-icon.png'); cursor: pointer;}
+#imgIcon17:hover {content: url('https://www.progitec.info/wp-content/uploads/2024/11/hover-insta-icon.png'); cursor: pointer;}
+#imgIcon18:hover {content: url('https://www.progitec.info/wp-content/uploads/2024/11/hover-linked-icon.png'); cursor: pointer;}
+#imgIcon19:hover {content: url('https://www.progitec.info/wp-content/uploads/2024/11/hover-yt-icon.png'); cursor: pointer;}
+#imgIcon20:hover {content: url('https://www.progitec.info/wp-content/uploads/2024/11/hover-spark-icon.png'); cursor: pointer;}
+
+
+
+.help-container
+{
+  display: flex;
+  flex-direction: row;
+  flex-wrap: nowrap;
+  justify-content: space-between;
+  align-items: center;
+  padding: 20px;
+}
+
+.need-help,
+.contact-us
+{
+  display: flex;
+  flex-direction: column;
+  justify-content: center;
+  align-items: center;
+  width: 50%;
+  height: 500px;
+}
+
+.contact-us
+{
+  position: relative;
+  top: 10px;
+}
+
+.title-help
+{
+  width: 80%;
+  text-align: left;
+  font-size: 28px;
+  letter-spacing: 1.5px;
+}
+
+.title-help h1
+{
+  font-weight: 400;
+}
+
+
+.content-help, .content-help-blog
+{
+  display: flex;
+  justify-content: center;
+  align-items: center;
+  width: 80%;
+  text-align: left;
+  font-size: 20px;
+  letter-spacing: 1.5px;
+}
+
+
+
+
+.box-help
+{
+  width: 100%;
+  height: 35%;
+  display: flex;
+  flex-direction: column;
+  justify-content: center;
+  align-items: center;
+  position: relative;
+  right: 0%;
+}
+
+.top-part
+{
+
+  display: flex;
+  flex-direction: row;
+  flex-wrap: nowrap;
+  justify-content: center;
+  align-items: center;
+  width: 35%;
+  height: auto;
+  position: relative;
+  left: 10.5%;
+}
+
+.social-icon-box
+{
+  display: flex;
+  justify-content: center;
+  align-items: center;
+  width: 100%;
+  height: auto;
+}
+
+.fb-icon-box,
+.insta-icon-box,
+.linked-icon-box,
+.yt-icon-box,
+.spark-icon-box
+{
+  display: flex;
+  justify-content: center;
+  align-items: center;
+  width: 20%;
+  height: auto;
+}
+
+.social-icon-box img
+{
+  width: 80%;
+  height: auto;
+}
+
+.bottom-part
+{
+  display: flex;
+  justify-content: center;
+  align-items: center;
+  width: 80%;
+  height: 25%;
+  position: relative;
+  top: 15%;
+}
+
+.content-help-blog
+{
+  width: 50%;
+  height: 30%;
+}
+
+.bottom-part .button-box
+{
+  width: 100%;
+  justify-content: center;
+  display: flex;
+  align-items: center;
+}
+
+
+.sportello-help
+{
+  display: flex;
+  flex-direction: row;
+  justify-content: center;
+  align-items: flex-end;
+  width: 100%;
+  height: 29%;
+  position: relative;
+  right: 5%;
+  top: 2.25%;
+}
+
+.sportello-help .button-box
+{
+  width: 50%;
+  height: auto;
+  display: flex;
+  justify-content: center;
+  align-items: center;
+}
+
+.icon-help
+{
+  display: flex;
+  justify-content: center;
+  align-items: center;
+  width: 35%;
+  height: auto;
+  position: relative;
+  top: 25%;
+}
+
+.icon-help img
+{
+  width:  100%;
+  height: 100%;
+}
+
+.button-box
+{
+  height: auto;
+}
+
+.center
+{
+  justify-content: center;
+}
+
+.sportello-help .button-box a, .box-help .button-box a
+{
+	font-size:20px;
+}
+
+.styled-button 
+{   
+  letter-spacing: 1.5px;
+  background-color: #e8751a; /* Un bel arancione */
+  color: white; /* Testo bianco */
+  padding: 10px 20px; /* Spaziatura interna del bottone */
+  border: none; /* Rimuove il bordo predefinito */
+  border-radius: 15px; /* Angoli arrotondati */
+  font-size: 20px; /* Dimensione del testo */
+  font-weight: 400; /* Testo in grassetto */
+  text-align: center; /* Testo centrato */
+  cursor: pointer; /* Cursore a forma di mano */
+  box-shadow: 0 4px 6px rgba(0, 0, 0, 0.1); /* Leggera ombra */
+  transition: background-color 0.3s ease; /* Transizione per il cambio di colore */
+}
+
+
+.styled-button:hover, .sportello-button:hover
+{
+  background-color: #FF6347; /* Cambia il colore del bottone quando ci passi sopra con il mouse */
+  color: white; /* Testo bianco */
+}
+
+
+/*--- QUARTA SEZIONE ---*/
+.app-container
+{
+  border-radius: 10px;
+  display: flex;
+  flex-direction: row;
+  background-color: #f3f3f3;
+  align-items: center;
+  justify-content: center;
+  width: 100%;
+  height: 100%;
+  padding: 10px;
+}
+
+.left-box, .right-box
+{
+  width: 50%;
+  height: 100%;
+  display: flex;
+  flex-direction: column;
+  justify-content: center;
+  align-items: center;
+}
+
+.store-box
+{
+  width: 100%;
+  display: flex;
+  flex-direction: row;
+  justify-content: start;
+  position: relative;
+  bottom: 60px;
+}
+
+.google-box, .apple-box
+{
+  width: 50%;
+  height: 100%;
+  display: flex;
+  justify-content: start;
+  align-items: left;
+  position: relative;
+}
+
+.google-box
+{
+  right: 23%;
+}
+
+.apple-box
+{
+  left: 3%;
+}
+
+.google-box img, .apple-box img
+{
+  width: 100%;
+  height: 100%;
+  transition: 1s;
+  cursor: pointer;
+}
+
+/*--- PARTE SINISTRA ---*/
+.title-app
+{
+  display: flex;
+  width: 100%;
+  text-align: center;
+  justify-content: center;
+  align-items: center;
+  font-size: 33px;
+}
+
+.title-app h1
+{
+  font-family: "Roboto", sans-serif;
+  font-weight: 400;
+}
+
+.content-app
+{
+  display: flex;
+  flex-direction: column;
+  justify-content:  center;
+  align-items: center;
+  width: 100%;
+  height: 100%;
+  padding: 0;
+}
+
+.text-app
+{
+  width: 100%;
+  height: 30%;
+  text-align: justify;
+  display: flex;
+  flex-direction: column;
+  justify-content: space-around;
+  align-items: center;
+  margin: 0;
+}
+
+.text-app p
+{
+  width: 90%;
+  max-height: 100%;
+  font-size: 1.4em;
+  margin-bottom: 10px;
+}
+
+.mobile-app
+{
+  display: flex;
+  width: 100%;
+  height: 50%;
+  flex-direction: column;
+  justify-content: flex-start;
+  align-items: start;
+}
+
+.mobile-app img
+{
+  height: 35%;
+  width: 45%;
+  z-index: 0;
+}
+
+.mobile-logo
+{
+  display: flex;
+  width: 100%;
+  height: 100%;
+  flex-direction: column;
+  justify-content: center;
+  align-items: start;
+  position: relative;
+  z-index: 0;
+}
+
+.app-span-box
+{
+  position: relative;
+  top: 50px;
+  margin-left: 4%;
+
+  font-family: "Roboto", sans-serif;
+  font-weight: 400;
+}
+
+.app-span-box span
+{
+  font-size: 30px;
+  cursor: default;
+  width: 100%;
+}
+
+.app-span-box span, .app-span-box
+{
+	z-index:1;
+}
+
+.app-box:hover 
+{
+  transition: none;
+
+}
+
+/*--- PARTE DESTRA ---*/
+
+.right-box-images
+{
+  display: flex;
+  flex-direction: row;
+  justify-content: center;
+  align-items: center;
+  width: 100%;
+  height: 100%;
+}
+
+.image-box
+{
+  display: flex;
+  justify-content: center;
+  align-items: center;
+  width: 50%;
+  height: 100%;
+  position: relative;
+}
+
+.image-box img
+{
+  width: 65%;
+  height: 50%;
+}
+
+.sx-phone
+{
+  left: 90px;
+}
+
+.dx-phone
+{
+  right: 90px;
+}
+

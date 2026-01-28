@@ -1,0 +1,262 @@
+  /*--- GENERALE ---*/
+  body
+  {
+    /*border: 3px solid black;*/
+    width: 100%;
+    height: 100%;
+    display: flex;
+    flex-direction: column;
+    justify-content: center;
+    align-items: center;
+    overflow-x: hidden;
+    padding: 0px;
+    margin: 0px;
+  }
+
+  .m1
+  {
+    margin: 1px 3px 1px 3px
+  }
+
+    /*--- SEZIONE 1 ---*/
+    .first-part
+    {
+        width: 100%;
+        height: 550px;
+        display: flex;
+        flex-direction: column;
+        justify-content: center;
+        align-items: center;
+        margin-bottom: 1.5%;
+    }
+
+    .front-image
+    {
+        display: flex;
+        align-items: center;
+        justify-content: center;
+        width: 55%;
+        height: 60%;
+        margin-bottom: 1%;
+        
+    }
+
+    .front-image img
+    {
+        width: 55%;
+        height: auto;
+    }
+
+    .front-title
+    {
+        /*border: 3px solid black;*/
+        width: 50%;
+        height: 10%;
+        display: flex;
+        justify-content: center;
+        align-items: center;
+        text-align: center;
+        color: #3a6eb3fb; /*#02377cfb*/
+    }
+
+    .front-title h1
+    {
+        font-size: 3em;
+        letter-spacing: 1.5px;
+    }
+
+    .front-text
+    {
+        /*border: 3px solid #000;*/
+        width: 50%;
+        display: flex;
+        justify-content: center;
+        align-items: center;
+        text-align: center;
+    }
+
+    .front-text p
+    {
+        font-size: 1.5em;
+        text-align: center;
+        color: #778899;
+    }
+
+    /*--- SEZIONE 2 ---*/
+    .second-part
+    {
+        display: flex;
+        padding: 0;
+        width: 100%;
+        height: 100%;
+        flex-direction: row;
+        justify-content: space-around;
+        align-items: center;
+        margin-bottom: 3%;
+    }
+
+    .general-box
+    {
+        border: 3px solid silver;
+        display: flex;
+        flex-direction: column;
+        justify-content: center;
+        align-items: center;
+        width: 22%;
+        height: 100%;
+        border-radius: 10px;
+        box-shadow: 10px 10px 50px;
+        transition: 1s;
+    }
+
+    .general-box:hover
+    {
+      transform: scale(1.1);
+    }
+
+    .general-icon-box
+    {
+        width: 100%;
+        height: 50%;
+        display: flex;
+        flex-direction: row;
+        justify-content: center;
+        align-items: center;
+        margin-top: 3%;
+        cursor: default;
+    }
+
+    .sp-icon-box
+    {
+        display: flex;
+        width: 25%;
+    }
+
+    .sp-icon-box img
+    {
+        width: 100%;
+        height: 100%;
+    }
+
+    .circle
+    {
+        /*
+        width: 100px;
+        height: 100px;
+        background-color: #3a6eb3fb; #02377cfb;
+        border-radius: 50%;
+        */
+    }
+
+    .general-text-box
+    {
+        display: flex;
+        flex-direction: column;
+        width: 100%;
+        height: 600px;
+        justify-content: start;
+        align-items: flex-start;
+        margin-top: 0%;
+    }
+
+    .sportello-details-box
+    {
+        display: flex;
+        justify-content: center;
+        align-items: center;
+        flex-direction: column;
+        width: 100%;
+        height: 50%;
+    }
+    
+    .details-boxLogo
+    {
+        display: flex;
+        justify-content: center;
+        align-items: center;
+        width: 100%;
+        height: auto;
+        margin-bottom: 0%;
+    }
+    
+    .details-boxLogo img
+    {
+        width: 15%;
+        height: auto;
+        cursor: pointer; 
+        position: relative; 
+        z-index: 1;
+        top: 0px;
+    }
+
+    .details-boxText
+    {
+        width: 95%;
+        height: 100px;
+        display: flex;
+        justify-content: center;
+        align-items: center;
+        padding: 0;
+        margin-top: 3%;
+
+    }
+
+    .general-text-box p
+    {
+        margin: 0;
+        padding: 0px;
+        max-width: 90%;
+        font-size: 1.25em;
+        text-align: center;
+        color: #778899;
+    }
+
+    .sportello-button
+    {
+        margin-bottom: 5%;
+        width: 50%;
+        display: flex;
+        justify-content: left;
+        align-items: flex-end;
+        letter-spacing: 1.5px;
+        background-color: #e8751a; 
+        padding: 12.5px 25px; 
+        border: none; 
+        border-radius: 15px; 
+        text-align: center; 
+        cursor: pointer; 
+        box-shadow: 0 4px 6px rgba(0, 0, 0, 0.1); 
+        transition: background-color 0.3s ease;
+    }
+
+    .sportello-button span
+    {
+        font-size: 1em;
+        margin: 0;
+        font-weight: lighter;
+        color: white; 
+    }
+
+    .sportello-button a
+    {
+        width: 100%;
+        color: #fff; /* Imposta il colore del testo */
+        transition: color 0.3s ease; /* Aggiunge un effetto di transizione al cambio di colore */
+        font-weight: bold; /* Rende il testo in grassetto */
+        text-shadow: 1px 1px 2px rgba(57, 61, 70, 0.5); /* Aggiunge un effetto ombra al testo */
+        text-decoration: none; /* Rimuove la sottolineatura predefinita */
+      
+        font-family: "Roboto", sans-serif;
+        font-weight: 400;
+        font-style: normal;
+        height: 50px;
+        display: flex;
+        justify-content: center;
+        align-items: center;
+    }
+
+    .hidden
+    {
+        display: none;
+    }
+
