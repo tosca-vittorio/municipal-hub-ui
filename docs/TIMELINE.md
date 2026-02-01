@@ -104,16 +104,15 @@ Nota operativa:
 
 ---
 
-## B — 🟡 Documentazione core e hygiene (stabilizzazione base)
+## B — ☑️ Documentazione core e hygiene (stabilizzazione base)
 
 **Obiettivo:** consolidare i file “core” minimi (solo quelli che servono davvero adesso) e rendere pulita la repo prima dello sviluppo in codifica.
 
 **DoD (B) complessiva:**
 - `.gitignore` coerente con Vite/React (no rumore, no artefatti tracciati).
-- `README` come entrypoint minimo, senza ridondanze.
 - Policy chiara per asset pesanti (PDF/media) e per gli asset legacy da migrare.
-- Working Agreement minimo (workflow serio, applicabile).
-- (Opzionale ma consigliato) Tooling performance definito e tracciato (React Compiler), se adottato.
+- Base verificata con almeno un gate tecnico (dev/build) prima della codifica.
+- `README.md` presente con quickstart operativo e riferimenti stabili (link a `docs/TIMELINE.md`).
 
 ### ✅ B0 — `.gitignore` (Vite/React + hygiene repo)
 
@@ -133,69 +132,46 @@ Nota operativa:
 - `.gitignore` completo quanto basta, stabile, con commenti essenziali.
 - Nessun artefatto di build/cache finisce in Git.
 
-### ⬜ B1 — Policy asset pesanti (PDF/media) e mantenibilità repo
+### ✅ B1 — Policy asset pesanti (PDF/media) e mantenibilità repo
 
 **Obiettivo (B1):** definire come gestire PDF e media pesanti (soprattutto per nuovi inserimenti), per evitare repo “gonfia”; la legacy resta consultabile in `old_version/` finché non si decide una migrazione.
 
-* ⬜ Decisione: mantenere in Git / spostare fuori / Git LFS.
-* ⬜ Regole operative scritte in un documento owner (nome a scelta).
-* ⬜ Regole su cosa NON va mai versionato (es. export, zip, dump, duplicati).
-* ⬜ (Solo se scelto) migrazione controllata dei file pesanti (senza improvvisazione).
+* ✅ Decisione: **niente nuovi asset pesanti in Git** (policy per nuovi inserimenti).
+  * Preferire **fuori repo** per asset >= 5 MB (Release/Drive) e inserire riferimento.
+  * Git LFS si valuta **solo** se diventa un’esigenza ricorrente (step dedicato).
+* ✅ Regole operative scritte in un documento owner (working tree): `docs/B_assets_policy.md`.
+* ✅ Regole su cosa NON va mai versionato (export, zip, dump, duplicati).
 
 **DoD (B1):**
 - Policy scritta e applicabile.
-- Repo mantenibile (clone/pull ragionevoli) e istruzioni chiare per recupero asset (se esterni).
+- Regole chiare per evitare crescita non sostenibile; gestione asset esterni definita se necessaria.
 
-### ⬜ B2 — README (entrypoint minimo, no ridondanze)
+### ✅ B2 — Dev gates minimi (repo “dev-ready”)
 
-**Obiettivo (B2):** rendere il repository “clonabile e avviabile” in pochi minuti.
+**Obiettivo (B2):** assicurare che la base React/Vite sia pronta prima della codifica vera.
 
-* ⬜ Aggiornare/creare `README.md` con:
-  * scopo in 2–3 righe (cos’è Municipal-Hub-UI e perché esiste il rebuild)
-  * quickstart: `npm install` + `npm run dev`
-  * note minime su struttura: `old_version/` come legacy vault
-  * mappa docs (link a TIMELINE + doc bootstrap se presenti)
-  * comandi disponibili (dev/build/lint/preview)
+* ✅ Verifica `npm run dev` (smoke manuale: pagina si apre, nessun errore bloccante in console).
+* ✅ Verifica `npm run build` (build completa senza errori bloccanti).
 
 **DoD (B2):**
-- README sufficiente per avviare l’app React in locale.
-- README rimanda ai doc owner senza duplicare spiegazioni.
+- `npm run dev` OK.
+- `npm run build` OK.
 
-### ⬜ B3 — Working Agreement minimo (workflow serio, zero fuffa)
+### ✅ B3 — README (quickstart operativo)
 
-**Obiettivo (B3):** fissare 1 pagina di regole operative per lavorare senza confusione.
+**Obiettivo (B3):** rendere il repository avviabile in pochi minuti, con un entrypoint essenziale e stabile.
 
-* ⬜ Definire (anche in un doc breve o sezione README/docs):
-  * branch policy (main “freeze”, sviluppo su development)
-  * convenzione commit minima (es. `type: message`)
-  * Definition of Done minima per ogni blocco (dev/build/lint)
-  * scope lock (1 step = 1 obiettivo = 1 commit se possibile)
-* ⬜ (Se usi i prompt) allineare `docs/prompts/coding.md` e `docs/prompts/documentation.md` allo stato reale.
+* ✅ Aggiornato `README.md` con:
+  * scopo (rebuild React + legacy in `old_version/`)
+  * quickstart: `npm install` + `npm run dev`
+  * comandi principali: `dev`, `build`, `preview`, `lint`
+  * link a `docs/TIMELINE.md`
+  * chiarimento “truth-first”: il dettaglio operativo vive in `docs/TIMELINE.md`
 
 **DoD (B3):**
-- Regole operative scritte, brevi, applicabili.
-- Nessuna regola in contrasto con lo stato reale del repo.
-
-### ⬜ B4 — React Compiler (opzionale, consigliato) — setup e verifica
-
-**Obiettivo (B4):** abilitare React Compiler in modo tracciato e verificabile (senza introdurre ottimizzazioni manuali premature).
-
-* ⬜ Installare il compiler come devDependency:
-  * `npm install --save-dev --save-exact babel-plugin-react-compiler@latest`
-* ⬜ Abilitare il plugin nella pipeline Vite (via `@vitejs/plugin-react` con config `babel.plugins`).
-  * Nota: il React Compiler deve essere eseguito **per primo** nella pipeline Babel.
-* ⬜ Verificare che il compiler sia attivo:
-  * React DevTools: badge “Memo ✨” sui componenti ottimizzati, in dev mode.
-  * (Opzionale) verifica output build: presenza di trasformazioni del compiler.
-* ⬜ Definire regola di escape: se un componente causa problemi, usare temporaneamente la direttiva `"use no memo"` e aprire un TODO tecnico per rimuoverla dopo fix.
-
-**DoD (B4):**
-- Setup completato e verificato:
-  * `npm run dev` avviabile senza errori bloccanti.
-  * `npm run build` completa con successo (nessun errore bloccante in output).
-  * React DevTools mostra badge “Memo ✨” per componenti ottimizzati (in dev mode).
-- Nessun comportamento rotto lato runtime (verifica manuale base: render + navigazione se presente).
-- Regola di rollback/escape definita (no improvvisazione).
+- ✅ README essenziale, coerente con gli script reali in `package.json`.
+- ✅ Nessuna sezione “architettura” o dettagli destinati a cambiare (solo entrypoint).
+- ✅ Verifica truth-first: `git status -sb` pulito dopo il commit README (nessun file extra incluso).
 
 ---
 
@@ -325,6 +301,7 @@ prima di iniziare la migrazione dalla legacy (`old_version/`). Questo crea un ri
   * `npm run dev` funzioni
   * `npm run build` funzioni
   * la demo “Vision Pro” sia navigabile e stabile (verifica manuale scroll)
+* ⬜ Aggiornare `README.md` con la milestone “baseline moderna” (cosa include, come accedere alla demo, riferimento al tag della milestone).
 * ⬜ Commit dedicato “chiusura milestone” (senza mischiare altre attività).
 * ⬜ Creare un **tag annotato** (nome stabile) sul commit della milestone.
   * Esempio tag: `modern-baseline-v0.1` oppure `ui-baseline-visionpro-v0.1`
@@ -332,6 +309,7 @@ prima di iniziare la migrazione dalla legacy (`old_version/`). Questo crea un ri
 
 **DoD (C5):**
 - Milestone completata con build OK e demo verificata.
+- README aggiornato e allineato alla milestone/tag.
 - Commit dedicato presente su `development`.
 - Tag annotato presente su remoto e utilizzabile come riferimento pre-migrazione.
 - Nessuna migrazione legacy introdotta prima del tag (niente pagine/asset legacy “portati dentro” se non per la demo, e comunque solo placeholder).
@@ -386,3 +364,24 @@ in modo incrementale e verificabile.
 - Build esegue con successo.
 - Deploy documentato e ripetibile.
 - Prima release React rilasciata e verificabile.
+
+### ⬜ E1 — React Compiler (opzionale) — setup e verifica
+
+**Obiettivo (E1):** abilitare React Compiler in modo tracciato e verificabile (senza introdurre ottimizzazioni manuali premature).
+
+* ⬜ Installare il compiler come devDependency:
+  * `npm install --save-dev --save-exact babel-plugin-react-compiler@latest`
+* ⬜ Abilitare il plugin nella pipeline Vite (via `@vitejs/plugin-react` con config `babel.plugins`).
+  * Nota: il React Compiler deve essere eseguito **per primo** nella pipeline Babel.
+* ⬜ Verificare che il compiler sia attivo:
+  * React DevTools: badge “Memo ✨” sui componenti ottimizzati, in dev mode.
+  * (Opzionale) verifica output build: presenza di trasformazioni del compiler.
+* ⬜ Definire regola di escape: se un componente causa problemi, usare temporaneamente la direttiva `"use no memo"` e aprire un TODO tecnico per rimuoverla dopo fix.
+
+**DoD (E1):**
+- Setup completato e verificato:
+  * `npm run dev` avviabile senza errori bloccanti.
+  * `npm run build` completa con successo (nessun errore bloccante in output).
+  * React DevTools mostra badge “Memo ✨” per componenti ottimizzati (in dev mode).
+- Nessun comportamento rotto lato runtime (verifica manuale base: render + navigazione se presente).
+- Regola di rollback/escape definita.
