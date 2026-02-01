@@ -1,34 +1,49 @@
-import { useState } from 'react'
-import viteLogo from '/vite.svg'
-import reactLogo from '../assets/react.svg'
+import { NavLink, Route, Routes } from 'react-router-dom'
 import '../styles/App.css'
 
-function App() {
-  const [count, setCount] = useState(0)
+import HomePage from '../pages/HomePage.jsx'
+import RaccoltaPage from '../pages/RaccoltaPage.jsx'
+import SportelloPage from '../pages/SportelloPage.jsx'
 
+function App() {
   return (
-    <>
-      <div>
-        <a href="https://vite.dev" target="_blank">
-          <img src={viteLogo} className="logo" alt="Vite logo" />
-        </a>
-        <a href="https://react.dev" target="_blank">
-          <img src={reactLogo} className="logo react" alt="React logo" />
-        </a>
-      </div>
-      <h1>Vite + React</h1>
-      <div className="card">
-        <button onClick={() => setCount((count) => count + 1)}>
-          count is {count}
-        </button>
-        <p>
-          Edit <code>src/App.jsx</code> and save to test HMR
-        </p>
-      </div>
-      <p className="read-the-docs">
-        Click on the Vite and React logos to learn more
-      </p>
-    </>
+    <div style={{ minHeight: '100vh' }}>
+      <header
+        style={{
+          padding: '16px 24px',
+          borderBottom: '1px solid rgba(0,0,0,0.12)',
+          display: 'flex',
+          alignItems: 'center',
+          justifyContent: 'space-between',
+          gap: 16,
+        }}
+      >
+        <div style={{ fontWeight: 700 }}>Municipal Hub UI</div>
+
+        <nav style={{ display: 'flex', gap: 12 }}>
+          <NavLink to="/" end>
+            Home
+          </NavLink>
+          <NavLink to="/raccolta">Raccolta</NavLink>
+          <NavLink to="/sportello">Sportello</NavLink>
+        </nav>
+      </header>
+
+      <Routes>
+        <Route path="/" element={<HomePage />} />
+        <Route path="/raccolta" element={<RaccoltaPage />} />
+        <Route path="/sportello" element={<SportelloPage />} />
+        <Route
+          path="*"
+          element={
+            <main style={{ padding: 24 }}>
+              <h1>404</h1>
+              <p>Pagina non trovata.</p>
+            </main>
+          }
+        />
+      </Routes>
+    </div>
   )
 }
 
