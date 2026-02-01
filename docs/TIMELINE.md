@@ -124,7 +124,7 @@ Nota operativa:
   * output build `dist/`
   * cache/tooling (es. `.vite/`)
   * log e file OS/IDE
-  * file `.env*` (se usati)
+  * file `.env*`
 * ✅ Verifica truth-first con `git status -sb` (nessun file “rumore” da build/cache in pending).
 * ✅ Verifica che `node_modules/` e `dist/` non siano tracciati nel branch corrente (check: `git ls-files node_modules dist` e `git ls-tree -r --name-only HEAD | grep -E '^(dist/|node_modules/)'` → output vuoto).
 
@@ -175,7 +175,7 @@ Nota operativa:
 
 ---
 
-## C — ⬜ Baseline architetturale UI (prima di migrare feature)
+## C — 🟡 Baseline architetturale UI
 
 **Obiettivo:** definire una base minima e stabile per iniziare il refactoring, applicando una struttura `src/` chiara e una strategia di migrazione controllata.
 
@@ -185,65 +185,52 @@ Nota operativa:
 - Routing base (se necessario) e skeleton pagine.
 - Strategia di migrazione asset (copia selettiva + rename) definita e verificata con un import pilota.
 
-### ⬜ C-1 — ARCHITECTURE.md (blueprint struttura + regole)
+### ✅ C-1 — ARCHITECTURE.md (blueprint struttura + regole)
 
 **Obiettivo (C-1):** definire l’architettura target del rebuild (React/Vite) prima della migrazione: struttura cartelle, confini, convenzioni e regole operative.
 
-* ⬜ Creare `docs/ARCHITECTURE.md`.
-* ⬜ Definire:
+* ✅ Creato `docs/ARCHITECTURE.md`.
+* ✅ Definiti:
   * mappa repository (root + `old_version/` come vault)
   * struttura target `src/` (pages/components/layouts/lib/assets/styles, ecc.)
   * regole su asset (spazi nei nomi, rinomina, dove vivono)
   * regole su configurazione/env e script (dev/build/lint/preview)
   * regole minime di qualità (lint come gate)
-* ⬜ Allineare la descrizione allo stato reale (truth-first), senza includere scelte non ancora fatte.
+* ✅ Allineata la descrizione allo stato reale (truth-first), senza includere scelte non ancora fatte.
 
 **DoD (C-1):**
-- `docs/ARCHITECTURE.md` esiste e descrive una struttura target chiara e applicabile.
-- Nessuna sezione contiene assunzioni non supportate o decisioni non prese.
-- La struttura proposta è compatibile con Vite/React e con la presenza di `old_version/`.
+- ✅ `docs/ARCHITECTURE.md` esiste e descrive una struttura target chiara e applicabile.
+- ✅ Nessuna sezione contiene assunzioni non supportate o decisioni non prese.
+- ✅ La struttura proposta è compatibile con Vite/React e con la presenza di `old_version/`.
 
-### ⬜ C0 — Applicare struttura `src/` + convenzioni minime (da blueprint)
+### ✅ C0 — Applicare struttura `src/` + convenzioni minime (da `docs/ARCHITECTURE.md`)
 
 **Obiettivo (C0):** applicare in codice la struttura decisa in `docs/ARCHITECTURE.md`, minimizzando cambi e mantenendo l’app avviabile.
 
-* ⬜ Creare/riorganizzare cartelle in `src/` (es. `pages/`, `components/`, `layouts/`, `assets/`, `styles/`, `lib/`) secondo blueprint.
-* ⬜ Definire naming conventions minime (componenti, file, asset) e applicarle ai primi file toccati.
-* ⬜ Ripulire la demo Vite quanto basta (senza introdurre architettura “fantasma”) mantenendo `npm run dev` funzionante.
+* ✅ Creare/riorganizzare cartelle in `src/` (es. `pages/`, `components/`, `layouts/`, `assets/`, `styles/`, `lib/`) secondo blueprint.
+* ✅ Definire naming conventions minime (componenti, file, asset) e applicarle ai primi file toccati.
 
 **DoD (C0):**
 - Struttura `src/` coerente con il blueprint e documentata (anche 10 righe bastano).
 - Dev server continua a funzionare.
 - Nessuna dipendenza runtime dalla legacy (`old_version/` resta solo consultazione).
 
-### ⬜ C1 — Routing base + skeleton pagine
 
-**Obiettivo (C1):** introdurre il routing solo se serve (SPA multi-sezione), creando skeleton navigabili.
+### ✅ C1 — Routing base + skeleton pagine
 
-* ⬜ Aggiungere routing (se SPA multi-sezione).
-* ⬜ Creare pagine placeholder (Home, Raccolta, Sportello, App, ecc.).
-* ⬜ Aggiungere una navigazione minima.
+**Obiettivo (C1):** introdurre il routing (SPA multi-route) e creare skeleton navigabili.
+
+* ✅ Aggiungere routing (React Router).
+* ✅ Creare pagine placeholder (Home, Raccolta, Sportello, App, ecc.).
+* ✅ Aggiungere una navigazione minima.
 
 **DoD (C1):**
 - Route principali presenti e verificabili manualmente.
 - Nessun collegamento runtime alla legacy.
 
-### ⬜ C2 — Strategia migrazione asset (legacy → React) + import pilota
 
-**Obiettivo (C2):** definire regole pratiche e verificare un primo import asset senza “copie sporche”.
-
-* ⬜ Definire dove vivono gli asset in React (es. `src/assets/legacy/`).
-* ⬜ Regole su rinomina asset (evitare spazi, standardizzare).
-* ⬜ Primo import “pilota” (1–2 immagini) in una pagina.
-
-**DoD (C2):**
-- Import asset funzionante in React.
-- Regole scritte e tracciate (in `docs/ARCHITECTURE.md` o in un doc owner dedicato).
-- Nessun riferimento runtime a `old_version/`.
-
-### ⬜ C3 — UI deps + “baseline moderna” (demo) in isolamento
-
-**Obiettivo (C3):** installare e fissare le dipendenze UI necessarie per costruire l’effetto “Vision Pro”
+### ⬜ C2 — UI deps + “baseline moderna” (demo) in isolamento
+**Obiettivo (C2):** installare e fissare le dipendenze UI necessarie per costruire l’effetto “Vision Pro”
 in un **contesto isolato e controllato** (demo), così da:
 - ridurre il rischio (debug semplice: una sola variabile per volta),
 - validare subito la struttura `src/` e le convenzioni,
@@ -252,26 +239,24 @@ in un **contesto isolato e controllato** (demo), così da:
 
 * ⬜ Installare Framer Motion.
 * ⬜ (Opzionale, se deciso) installare Tailwind e/o libreria icone (es. `react-icons`).
-* ⬜ Creare una demo isolata (una sola modalità di accesso):
-  * **opzione A (preferita):** route dedicata (se routing già presente)
-  * **opzione B:** toggle temporaneo in `App` (se routing non è ancora introdotto)
+* ⬜ Creare una demo isolata accessibile tramite **route dedicata** (es. `/demo`).
 * ⬜ Implementare la demo in un punto chiaro (es. `src/pages/EffectsDemo.jsx|tsx`
   oppure `src/components/effects/*` + pagina demo).
 * ⬜ Regole anti-deriva (hard):
   * la demo NON diventa “seconda app”
   * massimo **2–3 sezioni** demo, contenuto placeholder
-  * nessun contenuto legacy migrato in C3
+  * nessun contenuto legacy migrato in C2
   * niente styling globale “definitivo” deciso qui (solo ciò che serve alla demo)
 
-**DoD (C3):**
+**DoD (C2):**
 - Dipendenze installate e lockfile aggiornato.
 - `npm run dev` avviabile e la demo renderizza (anche minimale).
 - La demo è isolata e accessibile in modo univoco (route o toggle).
 - Nessuna dipendenza runtime dalla legacy (`old_version/` resta solo consultazione).
 
-### ⬜ C4 — Effetto “Vision Pro” (sticky image + overlay parallax + scale/fade)
+### ⬜ C3 — Effetto “Vision Pro” (sticky image + overlay parallax + scale/fade)
 
-**Obiettivo (C4):** implementare l’effetto come **baseline moderna riusabile**: immagini sticky (100vh),
+**Obiettivo (C3):** implementare l’effetto come **baseline moderna riusabile**: immagini sticky (100vh),
 overlay copy con parallax + fade in/out, e uscita con scale-down + fade. L’obiettivo non è “fare scena”,
 ma produrre una sezione componibile che poi verrà usata nelle pagine reali (fase D).
 
@@ -286,15 +271,15 @@ ma produrre una sezione componibile che poi verrà usata nelle pagine reali (fas
   * `npm run build` OK (nessun errore bloccante)
   * nessun warning/errore runtime evidente in console durante lo scroll demo
 
-**DoD (C4):**
+**DoD (C3):**
 - Effetto completo funzionante in locale (scroll end-to-end senza glitch evidenti).
 - Sezioni riusabili via props (almeno: `imageUrl`, `heading`, `subheading`, `children`).
-- Implementazione confinata alla demo (nessuna migrazione legacy introdotta in C4).
+- Implementazione confinata alla demo (nessuna migrazione legacy introdotta in C3).
 - Build OK (`npm run build`) e comportamento stabile in dev (verifica manuale base).
 
-### ⬜ C5 — Milestone “baseline moderna” + tag (freeze pre-migrazione)
+### ⬜ C4 — Milestone “baseline moderna” + tag (freeze pre-migrazione)
 
-**Obiettivo (C5):** congelare un punto stabile e riproducibile della UI moderna (effetto “Vision Pro” + deps)
+**Obiettivo (C4):** congelare un punto stabile e riproducibile della UI moderna (effetto “Vision Pro” + deps)
 prima di iniziare la migrazione dalla legacy (`old_version/`). Questo crea un riferimento chiaro per rollback e confronto.
 
 * ⬜ Verificare che:
@@ -307,7 +292,7 @@ prima di iniziare la migrazione dalla legacy (`old_version/`). Questo crea un ri
   * Esempio tag: `modern-baseline-v0.1` oppure `ui-baseline-visionpro-v0.1`
 * ⬜ Push del tag su remoto.
 
-**DoD (C5):**
+**DoD (C4):**
 - Milestone completata con build OK e demo verificata.
 - README aggiornato e allineato alla milestone/tag.
 - Commit dedicato presente su `development`.
