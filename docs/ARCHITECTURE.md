@@ -356,11 +356,62 @@ Regole minime:
 ## 8.2 Dipendenze — principio + inventario truth-first
 
 Principio:
-- introdurre dipendenze solo quando motivate dallo step corrente (TIMELINE), evitando overengineering.
+- introdurre dipendenze solo quando motivate dallo step corrente (TIMELINE), evitando overengineering;
+- distinguere sempre tra:
+  - dipendenze dichiarate in `package.json`
+  - versioni effettivamente risolte nel lockfile / installate localmente.
 
-Truth-first:
-- l’inventario delle dipendenze e delle versioni si basa su evidenze (`package.json` + lockfile) e non su assunzioni.
-- se serve documentare “cosa è stato introdotto”, si riporta *solo* ciò che è presente nei file.
+Stato corrente verificato:
+
+### Dipendenze runtime dichiarate (`package.json`)
+- `react` → `^19.2.0`
+- `react-dom` → `^19.2.0`
+- `react-router-dom` → `^7.13.0`
+
+### Dev dependencies dichiarate (`package.json`)
+- `@eslint/js` → `^9.39.1`
+- `@types/react` → `^19.2.5`
+- `@types/react-dom` → `^19.2.3`
+- `@vitejs/plugin-react` → `^5.1.1`
+- `eslint` → `^9.39.1`
+- `eslint-plugin-react-hooks` → `^7.0.1`
+- `eslint-plugin-react-refresh` → `^0.4.24`
+- `globals` → `^16.5.0`
+- `vite` → `^7.2.4`
+
+### Versioni effettivamente installate (`npm ls --depth=0`)
+- `react` → `19.2.4`
+- `react-dom` → `19.2.4`
+- `react-router-dom` → `7.13.0`
+- `@eslint/js` → `9.39.2`
+- `@types/react` → `19.2.10`
+- `@types/react-dom` → `19.2.3`
+- `@vitejs/plugin-react` → `5.1.2`
+- `eslint` → `9.39.2`
+- `eslint-plugin-react-hooks` → `7.0.1`
+- `eslint-plugin-react-refresh` → `0.4.26`
+- `globals` → `16.5.0`
+- `vite` → `7.3.1`
+
+Lettura truth-first:
+- `package.json` usa range con caret (`^`), quindi il lockfile e l’installazione locale possono risolvere versioni patch/minor più recenti compatibili;
+- lo stato reale del repository va letto come combinazione di manifest + lockfile, non dal solo `package.json`;
+- allo stato attuale non risultano dipendenze per test frontend, coverage o UI animation oltre alla baseline React/Vite/Router + lint/tooling.
+
+Criterio di introduzione dipendenze:
+- runtime: solo quando abilitano capability reali della nuova app;
+- dev/tooling: solo quando supportano gate o flussi effettivamente aperti in TIMELINE;
+- vietato introdurre dipendenze speculative “per dopo”.
+
+Nota attuale:
+- il gate `npm run lint` è ora verde;
+- `old_version/` è esclusa dal lint tramite `globalIgnores(...)` in `eslint.config.js`, così il quality gate valuta solo la codebase React/Vite attiva;
+- questa scelta mantiene separati runtime moderno e vault legacy, evitando falsi rossi sul codice non ancora migrato.
+
+Verifiche usate:
+- `cat package.json`
+- `cat package-lock.json | head -n 120`
+- `npm ls --depth=0`
 
 ---
 

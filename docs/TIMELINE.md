@@ -251,13 +251,17 @@ Nota operativa:
 
 ---
 
-### ⬜ C4 — Dipendenze introdotte finora (solo reali)
+### ✅ C4 — Dipendenze introdotte finora (solo reali)
 **Deliverable:** sezione in `docs/ARCHITECTURE.md` (es. “Dipendenze: criterio + inventario truth-first”)
 
 **DoD (C4):**
-- Cosa cambia in `package.json` / lockfile (solo realtà, solo se evidenza disponibile).
-- Criterio di introduzione dipendenze (quando/ perché), senza riscrivere TIMELINE.
-- Verifiche: `npm install` riproducibile; versioni coerenti nel lockfile (se evidenza disponibile).
+- ✅ Cosa cambia in `package.json` / lockfile documentato solo su evidenza reale.
+- ✅ Criterio di introduzione dipendenze esplicitato senza duplicare TIMELINE.
+- ✅ Verifiche raccolte:
+  - `cat package.json`
+  - `cat package-lock.json | head -n 120`
+  - `npm ls --depth=0`
+- ✅ Distinzione resa esplicita tra versioni dichiarate e versioni effettivamente risolte/installate.
 
 ---
 
