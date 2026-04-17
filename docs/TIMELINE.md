@@ -287,7 +287,7 @@ Nota operativa:
 - Il boundary dei quality gate resta confinato alla codebase React/Vite attiva.
 - La baseline è abbastanza stabile da sostenere la successiva migrazione funzionale selettiva dalla legacy.
 
-### ⬜ D0 — Pianificazione baseline test frontend
+### ✅ D0 — Pianificazione baseline test frontend
 **Deliverable:** aggiornamento owner docs che apre formalmente il ciclo qualità frontend.
 
 **DoD (D0):**
