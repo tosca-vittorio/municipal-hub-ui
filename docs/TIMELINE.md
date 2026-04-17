@@ -180,7 +180,7 @@ Nota operativa:
 
 ---
 
-## C — 🟡 Documentazione repo-bound (fondamenta runtime) — backlog
+## C — ☑️ Documentazione repo-bound (fondamenta runtime) — backlog
 
 **Obiettivo:** completare la documentazione “owner” minima senza moltiplicare file:
 - `docs/ARCHITECTURE.md` = regole globali + blueprint + stato AS-IS (concettuale, no numeri step)
@@ -274,81 +274,138 @@ Nota operativa:
 
 ---
 
-## D — ⬜ Concept Track (04–11) + gating per implementazioni reali
+## D — 🟡 Frontend quality baseline (TDD + gates)
 
-**Obiettivo:** mantenere una roadmap concettuale ordinata (studio + docs), ma applicare **truth-first** per le parti implementative.
+**Obiettivo:** introdurre una baseline di qualità reale e verificabile sulla codebase React/Vite attiva, mantenendo separata la legacy non ancora migrata.
 
 **DoD (D) complessiva:**
-- I doc “concept-first” possono esistere anche senza implementazione, ma senza citare path inesistenti.
-- I doc “implementativi” restano BLOCCATI finché non esistono file/codice reali.
+- Esiste un setup test frontend reale e funzionante.
+- I gate canonici della base moderna sono definiti e verdi:
+  - `npm run lint`
+  - `npm run build`
+  - `npm run test`
+- Il boundary dei quality gate resta confinato alla codebase React/Vite attiva.
+- La baseline è abbastanza stabile da sostenere la successiva migrazione funzionale selettiva dalla legacy.
 
-### ⬜ D0 — Redux / Store (post State Management)
-**Deliverable:** `docs/concepts/04-redux-toolkit-store.md`
+### ⬜ D0 — Pianificazione baseline test frontend
+**Deliverable:** aggiornamento owner docs che apre formalmente il ciclo qualità frontend.
 
 **DoD (D0):**
-- Doc completo: quando Redux è giustificato vs overkill; cosa va nello store e cosa no; slices/selectors; async (thunk/RTK Query come opzione); anti-pattern.
-- Se Redux NON è implementato: doc resta concettuale e NON cita path inesistenti.
-- Se Redux è implementato: aggiungere sezione “As-is nel repo” con path reali.
+- Il blocco qualità frontend è attivo in TIMELINE.
+- La priorità è coerente con ROADMAP.
+- È esplicito che la migrazione legacy resta successiva alla baseline qualità.
 
-### ⬜ D1 — Routing (React Router) — ORA SCRIVIBILE (routing esiste)
-**Deliverable:** `docs/concepts/05-react-router-routing.md`
+### ⬜ D1 — Setup test runner frontend
+**Deliverable:** tooling test reale per React/Vite.
 
 **DoD (D1):**
-- Deve includere la mappa route **as-is** (route → pagina/componente → scopo) con path reali.
-- Deve chiarire SPA routing vs server routing + implicazioni deploy (rewrite su refresh deep-link).
-- Link vs NavLink + active route.
-- Verifiche: navigazione tra route principali senza errori; refresh su deep-link testabile (nota: dipende dall’hosting, qui si documenta il requisito).
+- Test runner introdotto con configurazione minima funzionante.
+- Script `test` disponibile in `package.json`.
+- Primo smoke test eseguibile in locale.
 
-### ⬜ D2 — HTTP Layer (Axios/fetch) — quando introdotto davvero
-**Deliverable:** `docs/concepts/06-react-http-axios.md`
+### ⬜ D2 — Smoke tests baseline su app shell e routing
+**Deliverable:** test minimi sulla superficie runtime già esistente.
 
 **DoD (D2):**
-- Se esiste `src/lib/http*` o `src/lib/api/*`, citarli con path reali.
-- Se non esistono: doc concettuale senza “finti path”.
-- Include: error handling, (eventuali) interceptors, normalizzazione errori, pattern con hooks.
+- Test su rendering app base.
+- Test su route placeholder principali.
+- Nessun falso rosso proveniente da `old_version/`.
 
-### ⛔ D3 — Testing + Error Boundaries — BLOCCATO finché non esiste setup reale
-**Deliverable:** `docs/concepts/08-react-testing-error-boundaries.md`
+### ⬜ D3 — Formalizzazione quality gates frontend
+**Deliverable:** gate canonici espliciti e riproducibili.
 
-**Motivo blocco (hard):**
-- Serve evidenza di tool (vitest/jest + RTL) e almeno 1 test reale, oppure un Error Boundary reale da citare.
+**DoD (D3):**
+- `npm run lint` verde.
+- `npm run build` verde.
+- `npm run test` verde.
+- Documentazione owner aggiornata sul boundary dei gate.
 
-### ⛔ D4 — Sicurezza (HttpOnly + CORS) — BLOCCATO finché non esiste auth/cross-origin reale
-**Deliverable:** `docs/concepts/09-web-security-httponly-cors.md`
+### ⬜ D4 — Freeze baseline qualità prima della migrazione legacy
+**Deliverable:** chiusura del ciclo qualità frontend come prerequisito al porting legacy.
 
-**Motivo blocco (hard):**
-- Senza auth/cookie/cross-origin reali si fa solo teoria generica: qui restiamo BLOCCATI finché non diventa pertinente.
-
-### ⬜ D5 — Performance (React/Vite, NON Next)
-**Deliverable:** `docs/concepts/10-react-performance-vite.md`
-
-**DoD (D5):**
-- Include: bundle analysis, code splitting (`React.lazy`), memoization “quando serve”, asset optimization.
-- Verifiche: almeno 1 misura ripetibile (Lighthouse o bundle analyzer).
-
-### ⛔ D6 — Sockets / Real-time — BLOCCATO finché non esiste client WS o dipendenza reale
-**Deliverable:** `docs/concepts/11-react-sockets-realtime.md`
+**DoD (D4):**
+- Baseline qualità stabile e difendibile.
+- Prerequisito formale soddisfatto per aprire la migrazione funzionale selettiva.
 
 ---
 
-## E — Sviluppi Futuri (dipende da target reale / scala / deploy)
+## E — ⬜ Backlog tecnico preservato (capability / architecture knowledge)
 
-### ⬜ E0 — Deploy SPA: rewrite, 404, alternative (HashRouter)
-**Deliverable:** `docs/concepts/spa-deploy-rewrites.md`
+**Obiettivo:** preservare e rendere riattivabili le aree tecniche e concettuali già emerse nel progetto senza trattarle come blocco operativo corrente.
+
+**DoD (E) complessiva:**
+- Le capability e i temi tecnici già identificati restano tracciati.
+- Nessun backlog utile viene perso durante l’attivazione del blocco qualità frontend.
+- I temi non ancora attivi non impattano i gate correnti della baseline React/Vite.
+
+### ⬜ E0 — State management / store
+**Deliverable:** decisione documentata su quando uno store globale è giustificato.
 
 **DoD (E0):**
+- Distinzione chiara tra stato locale, stato condiviso e stato globale.
+- Nessuna introduzione prematura di Redux/store senza bisogno reale.
+
+### ⬜ E1 — Routing deep-dive
+**Deliverable:** consolidamento della conoscenza su route map, active navigation, refresh deep-link e boundary deploy SPA.
+
+**DoD (E1):**
+- Il comportamento routing è spiegato in modo difendibile.
+- I requisiti deploy per deep-link restano tracciati.
+
+### ⬜ E2 — HTTP layer
+**Deliverable:** criteri di introduzione di fetch/axios e boundary API futuri.
+
+**DoD (E2):**
+- Nessun path fittizio.
+- Strategia documentata solo se il codice reale lo richiede.
+
+### ⬜ E3 — Testing avanzato / error boundaries
+**Deliverable:** backlog preservato per quality evolution oltre la baseline iniziale.
+
+**DoD (E3):**
+- Il tema resta tracciato.
+- La sua attivazione dipende da setup runtime reale.
+
+### ⬜ E4 — Security boundary
+**Deliverable:** backlog preservato su hardening, CORS, HttpOnly, boundary auth.
+
+**DoD (E4):**
+- Nessuna teoria spacciata per stato reale.
+- Tema pronto per futura attivazione quando pertinente.
+
+### ⬜ E5 — Performance / optimization
+**Deliverable:** backlog preservato per analisi performance React/Vite.
+
+**DoD (E5):**
+- Ottimizzazioni solo su baseline misurabile.
+- Nessuna ottimizzazione speculativa.
+
+### ⬜ E6 — Real-time / sockets
+**Deliverable:** backlog preservato per capability future realtime.
+
+**DoD (E6):**
+- Tema tracciato ma non attivo.
+- Nessuna anticipazione architetturale senza codice reale.
+
+---
+
+## F — ⬜ Sviluppi futuri (dipende da target reale / scala / deploy)
+
+### ⬜ F0 — Deploy SPA: rewrite, 404, alternative (HashRouter)
+**Deliverable:** strategia deploy SPA documentata e verificata su target reale.
+
+**DoD (F0):**
 - Spiega perché serve rewrite a `index.html`, implicazioni refresh deep-link.
 - Trade-off HashRouter.
 - Verifiche: test su ambiente reale (non ipotesi).
 
-### ⬜ E1 — Consolidamento import/export (barrel exports sì/no)
-**Deliverable:** `docs/concepts/imports-and-barrels.md`
+### ⬜ F1 — Consolidamento import/export (barrel exports sì/no)
+**Deliverable:** criteri stabili per barrel exports e struttura import.
 
-**DoD (E1):**
-- Quando barrel è accettabile e quando no; rischi e cicli.
-- Verifiche: build/lint ok; import graph leggibile.
-
----
+**DoD (F1):**
+- Quando barrel è accettabile e quando no.
+- Rischi di cicli e import graph poco leggibile.
+- Verifiche: build/lint ok; import graph comprensibile.
 
 ## Quality bar (hard)
 

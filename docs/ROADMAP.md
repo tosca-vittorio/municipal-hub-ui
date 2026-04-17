@@ -46,19 +46,19 @@ Include:
 Esito atteso:
 - governance SEOF pulita, senza doppie source of truth.
 
-### R2 — Concept track guidato dal repository reale
+### R2 — Backlog tecnico/architetturale preservato e riattivabile
 Obiettivo:
-- costruire e consolidare i documenti concept-first già previsti in TIMELINE, partendo da ciò che è già presente e verificabile.
+- preservare le capability tecniche, architetturali e conoscitive già emerse nel progetto, senza trattarle come blocco operativo corrente.
 
 Ordine logico iniziale:
-1. routing
-2. store/state avanzato solo se giustificato
+1. routing deep-dive
+2. state/store solo se giustificato
 3. HTTP layer solo quando esiste codice reale
-4. testing/error boundaries solo dopo setup reale
+4. testing avanzato / error boundaries dopo baseline test reale
 5. performance solo dopo baseline misurabile
 
 Esito atteso:
-- corpus documentale coerente con lo stato reale del progetto, senza anticipazioni tecniche arbitrarie.
+- patrimonio tecnico preservato, riattivabile e coerente con lo stato reale del repository, senza dispersione di conoscenza utile.
 
 ### R3 — Quality baseline frontend
 Obiettivo:
@@ -71,7 +71,7 @@ Direzione attesa:
 - gate chiari e riproducibili
 
 Esito atteso:
-- base moderna verificabile prima di ulteriore evoluzione funzionale.
+- base moderna verificabile, testabile e difendibile prima di qualsiasi migrazione funzionale selettiva dalla legacy.
 
 ### R4 — Evoluzione runtime/UI reale
 Obiettivo:
@@ -116,13 +116,12 @@ Esito atteso:
 
 Priorità attuale:
 
-1. consolidamento owner docs
-2. concept track già supportato dal repo reale
-3. quality baseline frontend
-4. sviluppo runtime/UI reale
-5. eventuale migrazione legacy
-6. deploy/release
-
+1. quality baseline frontend
+2. backlog tecnico/architetturale preservato e riattivabile
+3. sviluppo runtime/UI reale
+4. migrazione funzionale selettiva della legacy
+5. deploy/release
+   
 ---
 
 ## Regole di mantenimento
