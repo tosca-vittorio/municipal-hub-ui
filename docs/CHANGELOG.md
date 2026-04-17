@@ -3,10 +3,38 @@
 ## Branch: [development]
 
 ### [Unreleased]
-> Scope corrente: **chiusura truth-first di `C4 — Dipendenze introdotte finora` e hardening del boundary lint sulla codebase React/Vite attiva**
+> Scope corrente: **chiusura truth-first di `D1 — Setup test runner frontend` dentro `D — Frontend quality baseline (TDD + gates)` e preparazione del successivo `D2 — Smoke tests baseline su app shell e routing`**
+
+#### D — Frontend quality baseline activation + preserved technical backlog
+> Ordinamento: **git log (più recente → più vecchio)** · principio **truth-first**: qui è riportato solo ciò che è committato.
+
+- **`84f8299` — docs(owner): align D1 frontend test runner evidence**
+  - **Type:** CHANGED · **Categoria:** Docs/Governance
+  - **Cosa cambia:** aggiorna `README.md`, `docs/ARCHITECTURE.md` e `docs/TIMELINE.md` per riallineare gli owner docs alla baseline test reale del frontend e segnare `D1` come chiuso in modo coerente.
+  - **Impatto:** rende la documentazione owner coerente con lo stato reale del repository e consolida formalmente `D1` prima dell’apertura di `D2`.
+
+- **`1428a1c` — test(frontend): close D1 setup test runner baseline**
+  - **Type:** CHANGED · **Categoria:** Test/Quality Gate
+  - **Cosa cambia:** consolida la baseline test frontend rendendo disponibile `npm run test` e portando a verde almeno un primo smoke test su `src/pages/HomePage.test.jsx`.
+  - **Impatto:** chiude il setup minimo del test runner frontend e abilita il passaggio corretto a `D2 — Smoke tests baseline su app shell e routing`.
+
+- **`7ff098b` — docs(timeline): close D0 frontend quality planning**
+  - **Type:** CHANGED · **Categoria:** Docs/Governance
+  - **Cosa cambia:** aggiorna `docs/TIMELINE.md` segnando `D0 — Pianificazione baseline test frontend` come completato.
+  - **Impatto:** rende auditabile la chiusura del primo micro-step del blocco `D` e prepara `D1 — Setup test runner frontend` come prossimo step corretto.
+
+- **`8a58e8d` — docs(owner): activate frontend quality baseline and preserve technical backlog**
+  - **Type:** CHANGED · **Categoria:** Docs/Governance
+  - **Cosa cambia:** aggiorna `docs/TIMELINE.md` e `docs/ROADMAP.md` per archiviare formalmente il blocco `C`, attivare `D — Frontend quality baseline (TDD + gates)` come nuovo blocco operativo corrente, preservare il patrimonio tecnico già emerso nel nuovo blocco `E` e ricollocare i futuri sviluppi in `F`.
+  - **Impatto:** riallinea la governance del rebuild React/Vite a una traiettoria più difendibile: prima baseline qualità reale sulla codebase attiva, poi sviluppo runtime/UI e solo successivamente migrazione funzionale selettiva dalla legacy, senza dispersione del backlog tecnico utile.
 
 #### C — Repo-bound owner docs + frontend quality boundary
 > Ordinamento: **git log (più recente → più vecchio)** · principio **truth-first**: qui è riportato solo ciò che è committato.
+
+- **`1d86fd8` — docs(changelog): register C4 closure and lint boundary**
+  - **Type:** CHANGED · **Categoria:** Docs/Governance
+  - **Cosa cambia:** aggiorna `docs/CHANGELOG.md` per registrare formalmente la chiusura truth-first di `C4` e l’hardening del boundary lint sulla codebase React/Vite attiva.
+  - **Impatto:** rende auditabile nel changelog la chiusura del doc gate dipendenze/lint e consolida la sequenza owner già presente su `development`.
 
 - **`3111efe` — docs(owner): close C4 dependency inventory and align architecture**
   - **Type:** CHANGED · **Categoria:** Docs/Governance
