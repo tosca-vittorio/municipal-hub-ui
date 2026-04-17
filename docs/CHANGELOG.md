@@ -3,7 +3,25 @@
 ## Branch: [development]
 
 ### [Unreleased]
-> Scope corrente: baseline React/Vite consolidata fino a C1 e riallineamento owner docs in corso.
+> Scope corrente: **chiusura truth-first di `C4 — Dipendenze introdotte finora` e hardening del boundary lint sulla codebase React/Vite attiva**
+
+#### C — Repo-bound owner docs + frontend quality boundary
+> Ordinamento: **git log (più recente → più vecchio)** · principio **truth-first**: qui è riportato solo ciò che è committato.
+
+- **`3111efe` — docs(owner): close C4 dependency inventory and align architecture**
+  - **Type:** CHANGED · **Categoria:** Docs/Governance
+  - **Cosa cambia:** aggiorna `docs/ARCHITECTURE.md` con l’inventario truth-first delle dipendenze dichiarate e di quelle effettivamente risolte/installate, chiarisce il criterio di introduzione delle dipendenze e riallinea `docs/TIMELINE.md` segnando `C4` come chiuso.
+  - **Impatto:** consolida formalmente il doc gate repo-bound sulle dipendenze reali della baseline React/Vite e rende auditabile la distinzione tra manifest (`package.json`) e stato risolto (`package-lock.json` / `npm ls`).
+
+- **`3eea9fa` — build(lint): harden eslint boundary for active frontend code**
+  - **Type:** CHANGED · **Categoria:** Build/Quality Gate
+  - **Cosa cambia:** aggiorna `eslint.config.js` per escludere dal lint la vault legacy `old_version/` e gli artefatti locali di report/output, riallineando il quality gate alla sola codebase React/Vite attiva e aggiornando il boundary di parsing ECMAScript.
+  - **Impatto:** ripristina quality gate frontend affidabili e completamente verdi (`npm run lint`, `npm run build`) senza contaminare la verifica della nuova app con codice legacy non ancora migrato.
+
+- **`4f91380` — docs(owner): realign timeline architecture changelog roadmap and gitignore**
+  - **Type:** CHANGED · **Categoria:** Docs/Governance
+  - **Cosa cambia:** riallinea `.gitignore`, `docs/TIMELINE.md`, `docs/ARCHITECTURE.md`, `docs/CHANGELOG.md` e `docs/ROADMAP.md` al perimetro owner effettivamente versionato, alla nuova governance truth-first e alla struttura documentale repo-bound del rebuild React/Vite.
+  - **Impatto:** stabilizza il pacchetto owner docs minimo del progetto, rende coerenti le source of truth documentali e prepara la successiva chiusura di `C4` e il riallineamento dei quality gate.
 
 #### Historical context (foundation → C1)
 > Ordinamento: cronologico · principio truth-first: qui è riportato solo ciò che è già committato su `development`.
