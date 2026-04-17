@@ -65,6 +65,7 @@ npm run dev       # dev server (Vite)
 npm run build     # build produzione
 npm run preview   # preview della build
 npm run lint      # lint (ESLint)
+npm run test      # test frontend baseline (Vitest)
 ```
 
 ---

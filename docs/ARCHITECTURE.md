@@ -42,6 +42,7 @@ Regola:
   - `build`: `vite build`
   - `lint`: `eslint .`
   - `preview`: `vite preview`
+  - `test`: `vitest run`
 
 - Linguaggio (stato attuale): JavaScript/JSX. TypeScript non è adottato; eventuale introduzione solo in uno step dedicato.
 
@@ -332,8 +333,9 @@ Vincolo di sequenza (hard, legacy):
 
 Gates minimi coerenti con TIMELINE:
 - `npm run dev` deve restare avviabile nello step corrente (gate continuo)
-- `npm run build` deve passare quando richiesto dalla TIMELINE (es. milestone **C4**)
-- `npm run lint` usato come gate quando previsto o quando la base cresce (step/milestone dedicati)
+- `npm run build` deve passare quando richiesto dalla TIMELINE
+- `npm run lint` deve restare verde come gate della codebase React/Vite attiva
+- `npm run test` è ora disponibile come gate baseline frontend; la sua formalizzazione completa resta demandata a `D3`
 
 Regola: nessun cambiamento strutturale senza mantenere i gate dello step corrente.
 
@@ -396,7 +398,9 @@ Stato corrente verificato:
 Lettura truth-first:
 - `package.json` usa range con caret (`^`), quindi il lockfile e l’installazione locale possono risolvere versioni patch/minor più recenti compatibili;
 - lo stato reale del repository va letto come combinazione di manifest + lockfile, non dal solo `package.json`;
-- allo stato attuale non risultano dipendenze per test frontend, coverage o UI animation oltre alla baseline React/Vite/Router + lint/tooling.
+- allo stato attuale il repository include anche un setup test frontend minimo attivabile con `npm run test`, eseguito tramite `vitest run`;
+- l’evidenza raccolta mostra almeno un primo smoke test verde su `src/pages/HomePage.test.jsx`;
+- coverage e quality evolution avanzata restano fuori dallo stato corrente e saranno formalizzate negli step successivi del blocco `D`.
 
 Criterio di introduzione dipendenze:
 - runtime: solo quando abilitano capability reali della nuova app;
@@ -455,9 +459,10 @@ npm run dev
 - Controllo import sospetti verso `old_version/`:
   - `grep -RIn "old_version" src || true`
 
-**Gate build/lint (quando richiesti dalla TIMELINE)**
+**Gate build/lint/test (quando richiesti dalla TIMELINE)**
 - `npm run build`
 - `npm run lint`
+- `npm run test`
 
 ---
 

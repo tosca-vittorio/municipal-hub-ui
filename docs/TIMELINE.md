@@ -295,13 +295,13 @@ Nota operativa:
 - La priorità è coerente con ROADMAP.
 - È esplicito che la migrazione legacy resta successiva alla baseline qualità.
 
-### ⬜ D1 — Setup test runner frontend
+### ✅ D1 — Setup test runner frontend
 **Deliverable:** tooling test reale per React/Vite.
 
 **DoD (D1):**
-- Test runner introdotto con configurazione minima funzionante.
-- Script `test` disponibile in `package.json`.
-- Primo smoke test eseguibile in locale.
+- ✅ Test runner frontend introdotto con configurazione minima funzionante.
+- ✅ Script `test` disponibile in `package.json`.
+- ✅ Primo smoke test eseguibile e verde in locale.
 
 ### ⬜ D2 — Smoke tests baseline su app shell e routing
 **Deliverable:** test minimi sulla superficie runtime già esistente.
