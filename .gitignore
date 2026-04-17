@@ -1,5 +1,6 @@
 #############################################
-# municipal-hub-ui — .gitignore (Vite + React)
+# municipal-hub-ui — .gitignore
+# Stack: Vite + React (+ local helper Python)
 #############################################
 
 #############################################
@@ -8,23 +9,32 @@
 node_modules/
 
 #############################################
-# 2) Build outputs
+# 2) Build outputs / packaging
 #############################################
 dist/
 dist-ssr/
 build/
+out/
+storybook-static/
 
 #############################################
 # 3) Tooling caches
 #############################################
 .vite/
 .cache/
-.tmp/
-temp/
+.parcel-cache/
 .turbo/
+tmp/
+temp/
 
 #############################################
-# 4) Logs
+# 4) Package-manager local stores
+#############################################
+.npm/
+.pnpm-store/
+
+#############################################
+# 5) Logs
 #############################################
 logs/
 *.log
@@ -35,7 +45,7 @@ pnpm-debug.log*
 lerna-debug.log*
 
 #############################################
-# 5) Environment / local overrides
+# 6) Environment / local overrides
 #############################################
 .env
 .env.*
@@ -44,20 +54,34 @@ lerna-debug.log*
 *.local
 
 #############################################
-# 6) Coverage / test artifacts
+# 7) Coverage / test artifacts
 #############################################
 coverage/
 .nyc_output/
+htmlcov/
+playwright-report/
+test-results/
+junit.xml
 
 #############################################
-# 7) OS files
+# 8) Python local helper artifacts
+#############################################
+__pycache__/
+*.py[cod]
+.pytest_cache/
+.mypy_cache/
+.ruff_cache/
+.coverage
+
+#############################################
+# 9) OS files
 #############################################
 .DS_Store
 Thumbs.db
 Desktop.ini
 
 #############################################
-# 8) IDE / Editor
+# 10) IDE / Editor
 #############################################
 .idea/
 *.iml
@@ -67,28 +91,27 @@ Desktop.ini
 
 .vs/
 *.suo
-*.ntvs*
-*.njsproj
-*.sln
-
 *.swp
 *.swo
 
 #############################################
-# 9) Optional: local notes/snapshots (opt-in)
+# 11) Local-only notes / snapshots / helpers
 #############################################
-# keep local-only snapshots in repo root:
 struttura.txt
+script.py
 
 #############################################
-# 10) Docs (version only TIMELINE.md for now)
+# 12) Docs (keep current project rule unchanged)
 #############################################
 docs/**
 !docs/
 !docs/TIMELINE.md
+!docs/CHANGELOG.md
+!docs/ARCHITECTURE.md
+!docs/ROADMAP.md
 
 #############################################
-# 11) Misc caches (optional but common)
+# 13) Misc caches
 #############################################
 .eslintcache
 *.tsbuildinfo

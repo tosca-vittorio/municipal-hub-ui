@@ -11,7 +11,7 @@ Principi:
 - **Anti-ridondanza**: i dettagli tecnici “owner” vivono in documenti dedicati; qui resta la sequenza + DoD.
 
 Nota operativa:
-- Il **versionamento della cartella `docs/`** (tutto o in parte) è una decisione del maintainer (tu).
+- Il **versionamento della cartella `docs/`** (tutto o in parte) è una decisione del maintainer.
   La timeline descrive cosa serve e quando, ma non impone *come* committare la documentazione.
 
 ---
@@ -19,8 +19,10 @@ Nota operativa:
 ## Legenda stati
 
 - ✅ = completato e verificato
+- ☑️ = archiviato
 - 🟡 = presente ma da verificare/chiudere (parziale)
 - ⬜ = da fare
+- ⛔ = BLOCCATO (manca codice reale / prerequisiti)
 
 ---
 
@@ -29,7 +31,7 @@ Nota operativa:
 **Obiettivo:** ricreare la repo, congelare la legacy come baseline storica e inizializzare la nuova base React in modo pulito e separato, mantenendo la legacy consultabile.
 
 **DoD (A) complessiva:**
-- Esiste una baseline legacy “freeze” sul branch principale con tag di riferimento.
+- Esiste una baseline legacy “freeze” (tag annotato) e un branch immutabile di consultazione `baseline/legacy` (snapshot).
 - Esiste un branch di lavoro `development` per il rebuild.
 - La legacy è isolata in `old_version/` in `development`.
 - In root esiste un progetto React (Vite) avviabile con `npm run dev`.
@@ -54,13 +56,16 @@ Nota operativa:
 - Baseline legacy presente sul branch principale.
 - Repository remota contiene la baseline.
 
-### ✅ A2 — Tag baseline legacy (freeze storico)
+### ✅ A2 — Tag baseline legacy (freeze storico) + branch consultazione
 
 * ✅ Creazione tag annotato della baseline legacy.
 * ✅ Push del tag su remoto.
+* ✅ Creazione branch **immutabile di consultazione** `baseline/legacy` (snapshot freeze).
+* ✅ Push del branch `baseline/legacy` su remoto.
 
 **DoD (A2):**
 - Tag legacy presente su remoto e utilizzabile come riferimento storico.
+- Branch `baseline/legacy` presente su remoto e usabile come riferimento consultazione (non si lavora lì).
 
 ### ✅ A3 — Creazione ramo di lavoro `development`
 
@@ -94,13 +99,13 @@ Nota operativa:
 
 ### ✅ A6 — Documentazione setup/bootstrap (owner)
 
-* ✅ Creazione del documento owner di bootstrap (es. `docs/A_setup_bootstrap.md` o equivalente).
+* ✅ Creazione del documento owner di bootstrap: `docs/core/A6_setup_bootstrap.md`.
 * ✅ Documentazione coerente con lo stato reale (setup repo, freeze legacy, branch, `old_version/`, Vite bootstrap).
 
 **DoD (A6):**
-- Documento owner presente in `docs/` (working tree) e leggibile come riferimento ufficiale del bootstrap.
+- Documento owner presente: `docs/core/A6_setup_bootstrap.md`.
 - Il contenuto è coerente con lo stato reale e non contiene azioni non eseguite.
-- Il versionamento di `docs/` resta una scelta del maintainer (come da nota operativa).
+- Il versionamento di `docs/` resta una scelta del maintainer.
 
 ---
 
@@ -139,7 +144,7 @@ Nota operativa:
 * ✅ Decisione: **niente nuovi asset pesanti in Git** (policy per nuovi inserimenti).
   * Preferire **fuori repo** per asset >= 5 MB (Release/Drive) e inserire riferimento.
   * Git LFS si valuta **solo** se diventa un’esigenza ricorrente (step dedicato).
-* ✅ Regole operative scritte in un documento owner (working tree): `docs/B_assets_policy.md`.
+* ✅ Regole operative scritte in un documento owner (working tree): `docs/core/B1_assets_policy.md`.
 * ✅ Regole su cosa NON va mai versionato (export, zip, dump, duplicati).
 
 **DoD (B1):**
@@ -175,198 +180,189 @@ Nota operativa:
 
 ---
 
-## C — 🟡 Baseline architetturale UI
+## C — 🟡 Documentazione repo-bound (fondamenta runtime) — backlog
 
-**Obiettivo:** definire una base minima e stabile per iniziare il refactoring, applicando una struttura `src/` chiara e una strategia di migrazione controllata.
+**Obiettivo:** completare la documentazione “owner” minima senza moltiplicare file:
+- `docs/ARCHITECTURE.md` = regole globali + blueprint + stato AS-IS (concettuale, no numeri step)
+- `docs/core/*` = documenti per-file (code-as-is + sintassi + confini locali)
+- `docs/TIMELINE.md` = sequenza + DoD + gate (source of truth operativa)
 
-**DoD (C) complessiva:**
-- Blueprint architetturale scritto (`docs/ARCHITECTURE.md`) e compatibile con lo stato reale.
-- Struttura `src/` definita e adottata senza rompere `npm run dev`.
-- Routing base (se necessario) e skeleton pagine.
-- Strategia di migrazione asset (copia selettiva + rename) definita e verificata con un import pilota.
+### ✅ C0 — Runtime foundations consolidate in `docs/ARCHITECTURE.md` (NO nuovo doc)
 
-### ✅ C-1 — ARCHITECTURE.md (blueprint struttura + regole)
+**Decisione (anti-ridondanza):**
+- Non creare `docs/concepts/runtime-foundations.md`.
+- Le “runtime foundations” vivono come sezione dedicata dentro `docs/ARCHITECTURE.md`.
 
-**Obiettivo (C-1):** definire l’architettura target del rebuild (React/Vite) prima della migrazione: struttura cartelle, confini, convenzioni e regole operative.
+**Deliverable:** sezione in `docs/ARCHITECTURE.md` (runtime foundations / boundaries “cosa vive dove”).
 
-* ✅ Creato `docs/ARCHITECTURE.md`.
-* ✅ Definiti:
-  * mappa repository (root + `old_version/` come vault)
-  * struttura target `src/` (pages/components/layouts/lib/assets/styles, ecc.)
-  * regole su asset (spazi nei nomi, rinomina, dove vivono)
-  * regole su configurazione/env e script (dev/build/lint/preview)
-  * regole minime di qualità (lint come gate)
-* ✅ Allineata la descrizione allo stato reale (truth-first), senza includere scelte non ancora fatte.
+**Contenuto (IN-SCOPE):**
+- Struttura `src/` **AS-IS** (solo cartelle/file reali) + ruoli minimi.
+- Regole anti-ciclo minime (dipendenze concettuali) coerenti col blueprint.
+- Pagine skeleton: cosa sono, cosa è ammesso/vietato (route table resta owner in `docs/core/C1b_entrypoint-app.md`).
+- Navigazione minima: dove può vivere oggi (fase skeleton) e criteri di evoluzione.
+- Rimando canonico a:
+  - CSS: § 8.1
+  - Dipendenze: § 8.2
+  - Accessibilità baseline: § 8.3
 
-**DoD (C-1):**
-- ✅ `docs/ARCHITECTURE.md` esiste e descrive una struttura target chiara e applicabile.
-- ✅ Nessuna sezione contiene assunzioni non supportate o decisioni non prese.
-- ✅ La struttura proposta è compatibile con Vite/React e con la presenza di `old_version/`.
-
-### ✅ C0 — Applicare struttura `src/` + convenzioni minime (da `docs/ARCHITECTURE.md`)
-
-**Obiettivo (C0):** applicare in codice la struttura decisa in `docs/ARCHITECTURE.md`, minimizzando cambi e mantenendo l’app avviabile.
-
-* ✅ Creare/riorganizzare cartelle in `src/` (es. `pages/`, `components/`, `layouts/`, `assets/`, `styles/`, `lib/`) secondo blueprint.
-* ✅ Definire naming conventions minime (componenti, file, asset) e applicarle ai primi file toccati.
+**OUT-OF-SCOPE:**
+- Scelte definitive di styling/tooling (Tailwind, CSS-in-JS, UI kit) se non decise in TIMELINE.
+- Inventari versioni senza evidenze (package/lock).
+- Strategie di deploy senza target deciso.
 
 **DoD (C0):**
-- Struttura `src/` coerente con il blueprint e documentata (anche 10 righe bastano).
-- Dev server continua a funzionare.
-- Nessuna dipendenza runtime dalla legacy (`old_version/` resta solo consultazione).
+- Nessun nuovo file creato in `docs/concepts/` per questo tema.
+- `docs/ARCHITECTURE.md` contiene la sezione “runtime foundations” e non duplica `docs/core/*`.
+- Tutti i path citati sono reali.
+- Gate non peggiorati: `npm run dev` OK (e `npm run build` OK se già parte dei gate correnti).
 
+---
 
-### ✅ C1 — Routing base + skeleton pagine
-
-**Obiettivo (C1):** introdurre il routing (SPA multi-route) e creare skeleton navigabili.
-
-* ✅ Aggiungere routing (React Router).
-* ✅ Creare pagine placeholder (Home, Raccolta, Sportello, App, ecc.).
-* ✅ Aggiungere una navigazione minima.
+### ✅ C1 — Pagine placeholder (skeleton) e ruolo didattico
+**Deliverable:** sezione in `docs/ARCHITECTURE.md` (es. “Pagine placeholder: stato + regole di evoluzione”)
 
 **DoD (C1):**
-- Route principali presenti e verificabili manualmente.
-- Nessun collegamento runtime alla legacy.
+- Elenco pagine reali e path reali (as-is).
+- Cosa è ammesso ora (placeholder) e cosa è vietato (porting legacy anticipato, logica “sporca”).
+- Criteri minimi di evoluzione (da placeholder a reale).
+- Verifiche: pagine renderizzano senza errori; contenuti restano placeholder dove previsto (se evidenza disponibile).
 
+---
 
-### ⬜ C2 — UI deps + “baseline moderna” (demo) in isolamento
-**Obiettivo (C2):** installare e fissare le dipendenze UI necessarie per costruire l’effetto “Vision Pro”
-in un **contesto isolato e controllato** (demo), così da:
-- ridurre il rischio (debug semplice: una sola variabile per volta),
-- validare subito la struttura `src/` e le convenzioni,
-- produrre componenti riusabili da portare nelle pagine reali (fase D),
-- evitare contaminazione della migrazione legacy (che resta separata).
-
-* ⬜ Installare Framer Motion.
-* ⬜ (Opzionale, se deciso) installare Tailwind e/o libreria icone (es. `react-icons`).
-* ⬜ Creare una demo isolata accessibile tramite **route dedicata** (es. `/demo`).
-* ⬜ Implementare la demo in un punto chiaro (es. `src/pages/EffectsDemo.jsx|tsx`
-  oppure `src/components/effects/*` + pagina demo).
-* ⬜ Regole anti-deriva (hard):
-  * la demo NON diventa “seconda app”
-  * massimo **2–3 sezioni** demo, contenuto placeholder
-  * nessun contenuto legacy migrato in C2
-  * niente styling globale “definitivo” deciso qui (solo ciò che serve alla demo)
+### ✅ C2 — Navigazione minima: dove vive e perché (layout vs component)
+**Deliverable:** sezione in `docs/ARCHITECTURE.md` (es. “Routing + navigazione + app shell”)
 
 **DoD (C2):**
-- Dipendenze installate e lockfile aggiornato.
-- `npm run dev` avviabile e la demo renderizza (anche minimale).
-- La demo è isolata e accessibile in modo univoco (route o toggle).
-- Nessuna dipendenza runtime dalla legacy (`old_version/` resta solo consultazione).
+- Differenza tra `layouts/` e `components/` **solo se esistono** (altrimenti dichiarare “non presenti”).
+- Pattern “app shell” minimale e perché riduce accoppiamento.
+- Anti-pattern: header monolitico, nav che conosce troppo delle pagine.
+- Verifiche: nav non rompe rendering/pagine; nessuna dipendenza circolare evidente (anche solo concettuale).
 
-### ⬜ C3 — Effetto “Vision Pro” (sticky image + overlay parallax + scale/fade)
+---
 
-**Obiettivo (C3):** implementare l’effetto come **baseline moderna riusabile**: immagini sticky (100vh),
-overlay copy con parallax + fade in/out, e uscita con scale-down + fade. L’obiettivo non è “fare scena”,
-ma produrre una sezione componibile che poi verrà usata nelle pagine reali (fase D).
-
-* ⬜ Implementare `StickyImage` (background image, overlay scuro che sfuma, scaling su scroll).
-* ⬜ Implementare `OverlayCopy` (parallax su Y + opacity su scroll).
-* ⬜ Implementare un wrapper `StickySection`/`TextParallaxContent`
-  che compone immagine + testo + children sotto-sezione.
-* ⬜ Aggiungere 2–3 sezioni demo con contenuto placeholder.
-* ⬜ Verifica manuale (scroll): sticky corretto, overlay leggibile, parallax fluido, scaling/opacity coerenti.
-* ⬜ Gate minimo anti-regressione:
-  * `npm run dev` OK
-  * `npm run build` OK (nessun errore bloccante)
-  * nessun warning/errore runtime evidente in console durante lo scroll demo
+### ✅ C3 — CSS attuale: stato presente + regole minime
+**Deliverable:** già coperto in `docs/ARCHITECTURE.md` → sezione “8.1 CSS — stato presente + regole minime”.
 
 **DoD (C3):**
-- Effetto completo funzionante in locale (scroll end-to-end senza glitch evidenti).
-- Sezioni riusabili via props (almeno: `imageUrl`, `heading`, `subheading`, `children`).
-- Implementazione confinata alla demo (nessuna migrazione legacy introdotta in C3).
-- Build OK (`npm run build`) e comportamento stabile in dev (verifica manuale base).
+- Sezione presente con path reali:
+  - `src/styles/index.css` (import in `src/main.jsx`)
+  - `src/styles/App.css` (import in `src/app/App.jsx`)
+- Regole minime esplicite (no “framework war” prematura).
 
-### ⬜ C4 — Milestone “baseline moderna” + tag (freeze pre-migrazione)
+---
 
-**Obiettivo (C4):** congelare un punto stabile e riproducibile della UI moderna (effetto “Vision Pro” + deps)
-prima di iniziare la migrazione dalla legacy (`old_version/`). Questo crea un riferimento chiaro per rollback e confronto.
-
-* ⬜ Verificare che:
-  * `npm run dev` funzioni
-  * `npm run build` funzioni
-  * la demo “Vision Pro” sia navigabile e stabile (verifica manuale scroll)
-* ⬜ Aggiornare `README.md` con la milestone “baseline moderna” (cosa include, come accedere alla demo, riferimento al tag della milestone).
-* ⬜ Commit dedicato “chiusura milestone” (senza mischiare altre attività).
-* ⬜ Creare un **tag annotato** (nome stabile) sul commit della milestone.
-  * Esempio tag: `modern-baseline-v0.1` oppure `ui-baseline-visionpro-v0.1`
-* ⬜ Push del tag su remoto.
+### ⬜ C4 — Dipendenze introdotte finora (solo reali)
+**Deliverable:** sezione in `docs/ARCHITECTURE.md` (es. “Dipendenze: criterio + inventario truth-first”)
 
 **DoD (C4):**
-- Milestone completata con build OK e demo verificata.
-- README aggiornato e allineato alla milestone/tag.
-- Commit dedicato presente su `development`.
-- Tag annotato presente su remoto e utilizzabile come riferimento pre-migrazione.
-- Nessuna migrazione legacy introdotta prima del tag (niente pagine/asset legacy “portati dentro” se non per la demo, e comunque solo placeholder).
+- Cosa cambia in `package.json` / lockfile (solo realtà, solo se evidenza disponibile).
+- Criterio di introduzione dipendenze (quando/ perché), senza riscrivere TIMELINE.
+- Verifiche: `npm install` riproducibile; versioni coerenti nel lockfile (se evidenza disponibile).
 
 ---
 
-## D — ⬜ Migrazione funzionale (pilota + iterazione)
+### ✅ C5 — Accessibilità UI baseline (stato attuale + regole minime)
+**Deliverable:** già coperto in `docs/ARCHITECTURE.md` → sezione “8.3 Accessibilità baseline”.
 
-**Obiettivo:** migrare progressivamente le pagine legacy in React **solo dopo la milestone/tag C5**,
-in modo incrementale e verificabile.
+**DoD (C5):**
+- Regole pratiche + anti-pattern presenti.
+- Verifiche manuali indicate (Tab/Shift+Tab/focus visibile).
+
+---
+
+## D — ⬜ Concept Track (04–11) + gating per implementazioni reali
+
+**Obiettivo:** mantenere una roadmap concettuale ordinata (studio + docs), ma applicare **truth-first** per le parti implementative.
 
 **DoD (D) complessiva:**
-- Almeno una pagina completa migrata end-to-end.
-- Migrazione iterativa pagina per pagina, con componentizzazione minima e asset gestiti correttamente.
+- I doc “concept-first” possono esistere anche senza implementazione, ma senza citare path inesistenti.
+- I doc “implementativi” restano BLOCCATI finché non esistono file/codice reali.
 
-### ⬜ D0 — Migrazione pilota: 1 pagina end-to-end
-
-* ⬜ Selezionare una pagina (Home o Raccolta).
-* ⬜ Ricostruire UI e contenuti essenziali in React.
-* ⬜ Integrare asset necessari (copia selettiva, rename).
-* ⬜ Verifica manuale (render + navigazione + asset).
+### ⬜ D0 — Redux / Store (post State Management)
+**Deliverable:** `docs/concepts/04-redux-toolkit-store.md`
 
 **DoD (D0):**
-- Pagina raggiungibile dal routing.
-- Asset caricati correttamente.
-- Nessuna dipendenza runtime da `old_version/`.
+- Doc completo: quando Redux è giustificato vs overkill; cosa va nello store e cosa no; slices/selectors; async (thunk/RTK Query come opzione); anti-pattern.
+- Se Redux NON è implementato: doc resta concettuale e NON cita path inesistenti.
+- Se Redux è implementato: aggiungere sezione “As-is nel repo” con path reali.
 
-### ⬜ D1 — Migrazione incrementale pagine/feature + consolidamento CSS
-
-* ⬜ Migrazione pagina per pagina (Raccolta, Sportello, App…).
-* ⬜ Introduzione componenti riusabili.
-* ⬜ Consolidamento strategia styling (scelta da formalizzare quando si decide).
+### ⬜ D1 — Routing (React Router) — ORA SCRIVIBILE (routing esiste)
+**Deliverable:** `docs/concepts/05-react-router-routing.md`
 
 **DoD (D1):**
-- Ogni pagina migrata: route + UI minima + asset + verifica manuale.
-- Riduzione progressiva dell’uso di `old_version/` come riferimento.
+- Deve includere la mappa route **as-is** (route → pagina/componente → scopo) con path reali.
+- Deve chiarire SPA routing vs server routing + implicazioni deploy (rewrite su refresh deep-link).
+- Link vs NavLink + active route.
+- Verifiche: navigazione tra route principali senza errori; refresh su deep-link testabile (nota: dipende dall’hosting, qui si documenta il requisito).
+
+### ⬜ D2 — HTTP Layer (Axios/fetch) — quando introdotto davvero
+**Deliverable:** `docs/concepts/06-react-http-axios.md`
+
+**DoD (D2):**
+- Se esiste `src/lib/http*` o `src/lib/api/*`, citarli con path reali.
+- Se non esistono: doc concettuale senza “finti path”.
+- Include: error handling, (eventuali) interceptors, normalizzazione errori, pattern con hooks.
+
+### ⛔ D3 — Testing + Error Boundaries — BLOCCATO finché non esiste setup reale
+**Deliverable:** `docs/concepts/08-react-testing-error-boundaries.md`
+
+**Motivo blocco (hard):**
+- Serve evidenza di tool (vitest/jest + RTL) e almeno 1 test reale, oppure un Error Boundary reale da citare.
+
+### ⛔ D4 — Sicurezza (HttpOnly + CORS) — BLOCCATO finché non esiste auth/cross-origin reale
+**Deliverable:** `docs/concepts/09-web-security-httponly-cors.md`
+
+**Motivo blocco (hard):**
+- Senza auth/cookie/cross-origin reali si fa solo teoria generica: qui restiamo BLOCCATI finché non diventa pertinente.
+
+### ⬜ D5 — Performance (React/Vite, NON Next)
+**Deliverable:** `docs/concepts/10-react-performance-vite.md`
+
+**DoD (D5):**
+- Include: bundle analysis, code splitting (`React.lazy`), memoization “quando serve”, asset optimization.
+- Verifiche: almeno 1 misura ripetibile (Lighthouse o bundle analyzer).
+
+### ⛔ D6 — Sockets / Real-time — BLOCCATO finché non esiste client WS o dipendenza reale
+**Deliverable:** `docs/concepts/11-react-sockets-realtime.md`
 
 ---
 
-## E — ⬜ Hardening finale + release
+## E — Sviluppi Futuri (dipende da target reale / scala / deploy)
 
-**Obiettivo:** rendere la build pronta a una prima release React.
-
-### ⬜ E0 — Build + deploy + release v1
-
-* ⬜ Verifica `npm run lint`.
-* ⬜ Verifica `npm run build` e `npm run preview`.
-* ⬜ Scelta target deploy e istruzioni.
-* ⬜ Tag/release prima versione React.
+### ⬜ E0 — Deploy SPA: rewrite, 404, alternative (HashRouter)
+**Deliverable:** `docs/concepts/spa-deploy-rewrites.md`
 
 **DoD (E0):**
-- Build esegue con successo.
-- Deploy documentato e ripetibile.
-- Prima release React rilasciata e verificabile.
+- Spiega perché serve rewrite a `index.html`, implicazioni refresh deep-link.
+- Trade-off HashRouter.
+- Verifiche: test su ambiente reale (non ipotesi).
 
-### ⬜ E1 — React Compiler (opzionale) — setup e verifica
-
-**Obiettivo (E1):** abilitare React Compiler in modo tracciato e verificabile (senza introdurre ottimizzazioni manuali premature).
-
-* ⬜ Installare il compiler come devDependency:
-  * `npm install --save-dev --save-exact babel-plugin-react-compiler@latest`
-* ⬜ Abilitare il plugin nella pipeline Vite (via `@vitejs/plugin-react` con config `babel.plugins`).
-  * Nota: il React Compiler deve essere eseguito **per primo** nella pipeline Babel.
-* ⬜ Verificare che il compiler sia attivo:
-  * React DevTools: badge “Memo ✨” sui componenti ottimizzati, in dev mode.
-  * (Opzionale) verifica output build: presenza di trasformazioni del compiler.
-* ⬜ Definire regola di escape: se un componente causa problemi, usare temporaneamente la direttiva `"use no memo"` e aprire un TODO tecnico per rimuoverla dopo fix.
+### ⬜ E1 — Consolidamento import/export (barrel exports sì/no)
+**Deliverable:** `docs/concepts/imports-and-barrels.md`
 
 **DoD (E1):**
-- Setup completato e verificato:
-  * `npm run dev` avviabile senza errori bloccanti.
-  * `npm run build` completa con successo (nessun errore bloccante in output).
-  * React DevTools mostra badge “Memo ✨” per componenti ottimizzati (in dev mode).
-- Nessun comportamento rotto lato runtime (verifica manuale base: render + navigazione se presente).
-- Regola di rollback/escape definita.
+- Quando barrel è accettabile e quando no; rischi e cicli.
+- Verifiche: build/lint ok; import graph leggibile.
+
+---
+
+## Quality bar (hard)
+
+Ogni documento deve:
+- essere **truth-first** (descrive solo ciò che esiste davvero ora)
+- includere **cos’è / cosa non è**
+- includere anti-pattern ed errori comuni
+- citare **path reali** (quando implementativo)
+- includere verifiche minime riproducibili (comandi/check manuali)
+- non duplicare ARCHITECTURE/TIMELINE: rimandare invece di riscrivere
+
+---
+
+## Micro-check prima di iniziare un doc
+
+- `git status -sb` (stato pulito o stato documentato)
+- individuare i path reali dei file citati
+- verificare che non esista già un doc equivalente (anti-ridondanza)
+- decidere se il doc è:
+  - **concept-first** (ammesso anche senza implementazione, ma senza promesse)
+  - **implementativo** (solo con codice reale)
